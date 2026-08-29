@@ -117,19 +117,19 @@ AGENT X هي وحدة سرية خاصة تعمل تحت قيادة <b>X</b> فق
 
 <h2 contenteditable="true">قانون السرية</h2>
 <p contenteditable="true">معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالوحدة يصدر من قيادة X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.</p>
+<div class="final-statement">
+  <div class="final-line"></div>
+  <div class="final-mark">X</div>
 
-<div class="qr">
-<img src="AGENT_X_QR.png" alt="AGENT X QR">
-<div>
-<h2 contenteditable="true" style="margin-top:0">X — CLASSIFIED FILE</h2>
-<p contenteditable="true">امسح الرمز للوصول إلى الملف التعريفي الرقمي للوحدة.</p>
-<div class="code">QR TARGET: https://mtzajlad9-collab.github.io/AGENT-X/</div>
-</div>
-</div>
+  <h2>الخاتمة</h2>
 
-<div class="footer" contenteditable="true">AGENT X • X ONLY • CLASSIFIED • EYES ONLY • SILENCE IS SURVIVAL</div>
-</main></div>
+  <p>
+    إذا وصلت إلى هنا، فقد عرفت أكثر مما يجب.
+  </p>
 
+  <div class="signature">
+    — X COMMAND —
+  </div>
 <script>
 const ACCESS_CODE = "8226121";
 const gate = document.getElementById("gate");
@@ -153,6 +153,9 @@ function verify(){
 document.getElementById("enter").addEventListener("click",verify);
 pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
 
+
+  <div class="final-line"></div>
+</div>
 function savePage(){
  const c=document.documentElement.cloneNode(true);
  c.querySelector("#gate")?.remove();
