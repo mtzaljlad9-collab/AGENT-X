@@ -23,9 +23,9 @@ p,li{color:#ccc;line-height:1.9;font-size:16px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .card{border:1px solid #333;padding:20px;background:#101010;position:relative}
 .card:after{content:"X";position:absolute;left:14px;bottom:7px;color:#191919;font-size:48px;font-weight:900}
-.qr{display:flex;align-items:center;gap:25px;justify-content:center;border:1px solid #444;margin-top:28px;padding:20px;background:#090909}
-.qr img{width:180px;height:180px;background:#fff;padding:8px}
-.code{font-family:monospace;direction:ltr;word-break:break-all;color:#888}
+
+
+
 .footer{text-align:center;color:#777;margin-top:28px;letter-spacing:2px;font:12px monospace}
 .controls{text-align:center;margin-bottom:14px}
 .controls button{background:#a22;color:#fff;border:0;padding:11px 17px;border-radius:5px;margin:4px;cursor:pointer}
@@ -45,7 +45,12 @@ p,li{color:#ccc;line-height:1.9;font-size:16px}
 .secretline{font:10px monospace;color:#666;letter-spacing:2px;margin-top:20px}
 .denied{animation:shake .18s linear 2}
 @keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(7px)}50%{transform:translateX(-7px)}75%{transform:translateX(5px)}100%{transform:translateX(0)}}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.logo h1{font-size:50px}.qr{flex-direction:column}.topline{flex-direction:column}}
+.final-statement{text-align:center;margin-top:42px;padding:32px 18px;border-top:1px solid #333;border-bottom:1px solid #333}
+.final-mark{font-size:58px;font-weight:900;color:#a22;letter-spacing:8px}
+.final-statement h2{border:0;padding:0;margin:8px 0;color:#c33}
+.final-statement p{font-size:20px;color:#ddd}
+.signature{margin-top:18px;color:#a22;font-family:monospace;letter-spacing:4px;font-size:13px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}}
 @media print{#gate,.controls{display:none!important}body{background:#fff}.sheet{background:#fff;color:#111;box-shadow:none}.card,.qr{background:#fff;border-color:#888}p,li,.sub,.hero{color:#222}.footer,.code{color:#333}}
 </style>
 </head>
@@ -117,19 +122,19 @@ AGENT X هي وحدة سرية خاصة تعمل تحت قيادة <b>X</b> فق
 
 <h2 contenteditable="true">قانون السرية</h2>
 <p contenteditable="true">معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالوحدة يصدر من قيادة X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.</p>
+
 <div class="final-statement">
-  <div class="final-line"></div>
-  <div class="final-mark">X</div>
+<div class="final-mark">X</div>
+<h2 contenteditable="true">الخاتمة</h2>
+<p contenteditable="true">إذا وصلت إلى هنا، فقد عرفت أكثر مما يجب.</p>
+<div class="signature" contenteditable="true">— X COMMAND —</div>
+</div>
 
-  <h2>الخاتمة</h2>
+</div>
 
-  <p>
-    إذا وصلت إلى هنا، فقد عرفت أكثر مما يجب.
-  </p>
+<div class="footer" contenteditable="true">AGENT X • X ONLY • CLASSIFIED • EYES ONLY • SILENCE IS SURVIVAL</div>
+</main></div>
 
-  <div class="signature">
-    — X COMMAND —
-  </div>
 <script>
 const ACCESS_CODE = "8226121";
 const gate = document.getElementById("gate");
@@ -153,16 +158,13 @@ function verify(){
 document.getElementById("enter").addEventListener("click",verify);
 pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
 
-
-  <div class="final-line"></div>
-</div>
 function savePage(){
  const c=document.documentElement.cloneNode(true);
  c.querySelector("#gate")?.remove();
  c.querySelectorAll(".controls").forEach(e=>e.remove());
  const b=new Blob(["<!doctype html>\n"+c.outerHTML],{type:"text/html;charset=utf-8"});
  const a=document.createElement("a");a.href=URL.createObjectURL(b);
- a.download="AGENT_X_Profile_Editable.html";a.click();
+ a.download="AGENT_X_Profile_Final.html";a.click();
  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
 </script>
