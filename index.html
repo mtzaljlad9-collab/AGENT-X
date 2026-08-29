@@ -1,36 +1,82 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AGENT X — CLASSIFIED</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AGENT X — X COMMAND</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#080808;color:#eee;font-family:Arial,Tahoma,sans-serif}
-.wrap{max-width:1000px;margin:auto;padding:24px}.sheet{background:#0d0d0d;border:1px solid #444;padding:30px;position:relative}
-.stamp{position:absolute;left:25px;top:22px;color:#a22;border:1px solid #a22;padding:6px 12px;letter-spacing:2px;font-size:11px;transform:rotate(-4deg)}
-.logo{text-align:center;padding:35px 0 22px;border-bottom:1px solid #333}
-.logo h1{font-size:72px;letter-spacing:9px;margin:0;color:#ddd}.x{color:#a22}.sub{font-size:20px;color:#aaa;margin-top:8px}
-.badge{display:inline-block;margin-top:18px;border:1px solid #777;padding:9px 18px;font-size:13px;letter-spacing:2px}
-h2{font-size:24px;color:#c33;border-right:4px solid #a22;padding-right:12px;margin-top:30px}
-p,li{color:#ccc;line-height:1.9;font-size:16px}.hero{font-size:21px;text-align:center;color:#ddd;padding:25px 15px;border-bottom:1px solid #333}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{border:1px solid #333;padding:20px;background:#101010}
-.tag{font-family:monospace;color:#aaa;font-size:13px}.qr{display:flex;align-items:center;gap:25px;justify-content:center;border:1px solid #444;margin-top:28px;padding:20px}.qr img{width:180px;height:180px;background:#fff;padding:8px}.code{font-family:monospace;direction:ltr;word-break:break-all;color:#888}
-.footer{text-align:center;color:#777;margin-top:28px;letter-spacing:2px;font-size:12px}
-.controls{text-align:center;margin-bottom:14px}.controls button{background:#a22;color:#fff;border:0;padding:11px 17px;border-radius:5px;margin:4px;cursor:pointer}
-[contenteditable]{outline:none;border-bottom:1px dashed transparent}[contenteditable]:focus{border-bottom-color:#a22}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.logo h1{font-size:48px}.stamp{position:static;display:inline-block}.qr{flex-direction:column}}
-@media print{body{background:#fff}.controls{display:none}.sheet{background:#fff;color:#111}.card{background:#fff;border-color:#888}p,li,.sub,.hero{color:#222}.footer,.tag,.code{color:#333}}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#030303;color:#eee;font-family:Arial,Tahoma,sans-serif}
+body{overflow-x:hidden}
+.wrap{max-width:1050px;margin:auto;padding:22px}
+.sheet{background:linear-gradient(145deg,#0d0d0d,#060606);border:1px solid #3f3f3f;padding:30px;position:relative;box-shadow:0 0 40px rgba(0,0,0,.5)}
+.sheet:before{content:"";position:absolute;inset:12px;border:1px solid #171717;pointer-events:none}
+.topline{display:flex;justify-content:space-between;gap:15px;color:#777;font:11px monospace;letter-spacing:2px;position:relative}
+.stamp{color:#b32626;border:1px solid #8f2222;padding:7px 12px;letter-spacing:2px;transform:rotate(-4deg)}
+.logo{text-align:center;padding:35px 0 22px;border-bottom:1px solid #333;position:relative}
+.logo h1{font-size:78px;letter-spacing:10px;margin:0;font-weight:900} .x{color:#b52626}
+.sub{font-size:20px;color:#aaa;margin-top:8px}
+.badge{display:inline-block;margin-top:18px;border:1px solid #777;padding:9px 18px;font:12px monospace;letter-spacing:2px}
+.hero{font-size:20px;text-align:center;color:#ddd;padding:25px 15px;border-bottom:1px solid #333;line-height:1.9}
+h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;margin-top:30px}
+p,li{color:#ccc;line-height:1.9;font-size:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{border:1px solid #333;padding:20px;background:#101010;position:relative}
+.card:after{content:"X";position:absolute;left:14px;bottom:7px;color:#191919;font-size:48px;font-weight:900}
+.qr{display:flex;align-items:center;gap:25px;justify-content:center;border:1px solid #444;margin-top:28px;padding:20px;background:#090909}
+.qr img{width:180px;height:180px;background:#fff;padding:8px}
+.code{font-family:monospace;direction:ltr;word-break:break-all;color:#888}
+.footer{text-align:center;color:#777;margin-top:28px;letter-spacing:2px;font:12px monospace}
+.controls{text-align:center;margin-bottom:14px}
+.controls button{background:#a22;color:#fff;border:0;padding:11px 17px;border-radius:5px;margin:4px;cursor:pointer}
+[contenteditable]{outline:none;border-bottom:1px dashed transparent}
+[contenteditable]:focus{border-bottom-color:#a22}
+
+#gate{position:fixed;inset:0;background:#020202;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.gatebox{width:min(470px,100%);border:1px solid #4a4a4a;background:linear-gradient(145deg,#101010,#050505);padding:34px;text-align:center;position:relative;box-shadow:0 0 50px rgba(0,0,0,.8)}
+.gatebox:before{content:"CLASSIFIED";position:absolute;top:12px;left:15px;color:#8e2222;font:10px monospace;letter-spacing:2px}
+.gatex{font-size:72px;font-weight:900;color:#a22;letter-spacing:8px;text-shadow:0 0 18px rgba(170,30,30,.25)}
+.gatebox h1{font-size:28px;letter-spacing:5px;margin:8px 0}
+.access{color:#a22;letter-spacing:3px;font:12px monospace;margin-bottom:20px}
+.gatebox p{font-size:14px;color:#999;line-height:1.8}
+.gatebox input{width:100%;height:50px;margin:14px 0;background:#030303;border:1px solid #555;color:#fff;text-align:center;font-size:18px;letter-spacing:5px}
+.gatebox button{width:100%;height:50px;background:#9f2222;border:0;color:#fff;font-weight:bold;letter-spacing:2px;cursor:pointer}
+#error{color:#c44;font-size:13px;min-height:20px;margin-top:10px}
+.secretline{font:10px monospace;color:#666;letter-spacing:2px;margin-top:20px}
+.denied{animation:shake .18s linear 2}
+@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(7px)}50%{transform:translateX(-7px)}75%{transform:translateX(5px)}100%{transform:translateX(0)}}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.logo h1{font-size:50px}.qr{flex-direction:column}.topline{flex-direction:column}}
+@media print{#gate,.controls{display:none!important}body{background:#fff}.sheet{background:#fff;color:#111;box-shadow:none}.card,.qr{background:#fff;border-color:#888}p,li,.sub,.hero{color:#222}.footer,.code{color:#333}}
 </style>
 </head>
 <body>
+
+<div id="gate">
+  <div class="gatebox" id="gatebox">
+    <div class="gatex">X</div>
+    <h1>AGENT X</h1>
+    <div class="access">SECURE TERMINAL • X COMMAND</div>
+    <p>هذا الملف مصنف وسري.<br>يجب التحقق من رمز الوصول قبل عرض محتويات الملف.</p>
+    <input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off">
+    <button id="enter" type="button">VERIFY ACCESS</button>
+    <div id="error" aria-live="polite"></div>
+    <div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div>
+  </div>
+</div>
+
 <div class="wrap">
-<div class="controls"><button onclick="window.print()">طباعة / PDF</button><button onclick="savePage()">حفظ النسخة المعدلة</button></div>
+<div class="controls">
+<button type="button" onclick="window.print()">طباعة / PDF</button>
+<button type="button" onclick="savePage()">حفظ النسخة المعدلة</button>
+</div>
+
 <main class="sheet">
-<div class="stamp">CLASSIFIED • X ONLY</div>
+<div class="topline"><span>FILE: AGENT-X / 001</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
 
 <header class="logo">
 <h1>AGENT <span class="x">X</span></h1>
 <div class="sub" contenteditable="true">الفرقة السرية التابعة لـ X</div>
-<div class="badge" contenteditable="true">X COMMAND • EYES ONLY</div>
+<div class="badge" contenteditable="true">X COMMAND • EYES ONLY • AUTHORIZED PERSONNEL</div>
 </header>
 
 <section class="hero" contenteditable="true">
@@ -38,26 +84,23 @@ AGENT X هي وحدة سرية خاصة تعمل تحت قيادة <b>X</b> فق
 لا تتبع لأي جهة أخرى، وجميع صلاحياتها وقراراتها تعود إلى قيادة X.
 </section>
 
-<h2 contenteditable="true">من هي AGENT X؟</h2>
-<p contenteditable="true">
-AGENT X وحدة عمليات سرية تم إنشاؤها لتنفيذ المهام الحساسة التي تتطلب أعلى درجات السرية والانضباط.
-وجود الوحدة غير معلن للعامة، ولا يتم الكشف عن أعضائها أو مهامها إلا بتصريح من قيادة X.
-</p>
+<h2 contenteditable="true">الملف التعريفي</h2>
+<p contenteditable="true">AGENT X وحدة عمليات سرية تم إنشاؤها لتنفيذ المهام الحساسة التي تتطلب أعلى درجات السرية والانضباط. وجود الوحدة غير معلن، ولا يتم الكشف عن أعضائها أو مهامها إلا بتصريح من قيادة X.</p>
 
 <div class="grid">
 <section class="card">
-<h2 contenteditable="true">التبعية</h2>
-<p contenteditable="true"><b>الجهة الوحيدة:</b> X</p>
+<h2 contenteditable="true">التبعية الرسمية</h2>
+<p contenteditable="true"><b>الجهة الوحيدة: X</b></p>
 <p contenteditable="true">AGENT X ليست فرقة مستقلة وليست تابعة لأي منظمة أخرى. مصدر الأوامر والصلاحيات هو قيادة X فقط.</p>
 </section>
 
 <section class="card">
-<h2 contenteditable="true">الطبيعة</h2>
+<h2 contenteditable="true">طبيعة الوحدة</h2>
 <ul>
 <li contenteditable="true">وحدة سرية</li>
-<li contenteditable="true">صلاحية محدودة ومعروفة للقيادة</li>
 <li contenteditable="true">هوية الأعضاء غير معلنة</li>
 <li contenteditable="true">المعلومات مصنفة سرية</li>
+<li contenteditable="true">العمل وفق قوانين السيرفر والـRP</li>
 </ul>
 </section>
 
@@ -73,28 +116,52 @@ AGENT X وحدة عمليات سرية تم إنشاؤها لتنفيذ المه
 </div>
 
 <h2 contenteditable="true">قانون السرية</h2>
-<p contenteditable="true">
-معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالوحدة يصدر من قيادة X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.
-</p>
+<p contenteditable="true">معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالوحدة يصدر من قيادة X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.</p>
 
 <div class="qr">
 <img src="AGENT_X_QR.png" alt="AGENT X QR">
 <div>
 <h2 contenteditable="true" style="margin-top:0">X — CLASSIFIED FILE</h2>
 <p contenteditable="true">امسح الرمز للوصول إلى الملف التعريفي الرقمي للوحدة.</p>
-<div class="code">QR TARGET: https://example.com/agent-x</div>
+<div class="code">QR TARGET: https://mtzajlad9-collab.github.io/AGENT-X/</div>
 </div>
 </div>
 
-<div class="footer" contenteditable="true">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+<div class="footer" contenteditable="true">AGENT X • X ONLY • CLASSIFIED • EYES ONLY • SILENCE IS SURVIVAL</div>
 </main></div>
+
 <script>
+const ACCESS_CODE = "X-2026";
+const gate = document.getElementById("gate");
+const gatebox = document.getElementById("gatebox");
+const pass = document.getElementById("pass");
+const error = document.getElementById("error");
+
+function verify(){
+  if(pass.value === ACCESS_CODE){
+    gate.style.display="none";
+    error.textContent="";
+  } else {
+    error.textContent="ACCESS DENIED — رمز الوصول غير صحيح";
+    gatebox.classList.remove("denied");
+    void gatebox.offsetWidth;
+    gatebox.classList.add("denied");
+    pass.value="";
+    pass.focus();
+  }
+}
+document.getElementById("enter").addEventListener("click",verify);
+pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
+
 function savePage(){
  const c=document.documentElement.cloneNode(true);
- c.querySelectorAll('.controls').forEach(e=>e.remove());
- const b=new Blob(['<!doctype html>\n'+c.outerHTML],{type:'text/html;charset=utf-8'});
- const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='AGENT_X_Profile_Editable.html';a.click();
+ c.querySelector("#gate")?.remove();
+ c.querySelectorAll(".controls").forEach(e=>e.remove());
+ const b=new Blob(["<!doctype html>\n"+c.outerHTML],{type:"text/html;charset=utf-8"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(b);
+ a.download="AGENT_X_Profile_Editable.html";a.click();
  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
 </script>
-</body></html>
+</body>
+</html>
