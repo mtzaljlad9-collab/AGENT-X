@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AGENT X — X COMMAND</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030303;color:#eee;font-family:Arial,Tahoma,sans-serif}
@@ -36,6 +37,7 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 </head>
 <body>
 
+<!-- نفس واجهة الدخول المطلوبة: بدون أي مربعات للملفات -->
 <div id="gate">
   <div class="gatebox" id="gatebox">
     <div class="gatex">X</div>
@@ -51,7 +53,8 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 <div class="wrap">
 <main class="sheet">
-<div id="home" class="page active">
+
+<section id="home" class="page">
 <div class="topline"><span>HOME — AGENT X / 001</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
 
 <header class="logo"><img src="AGENT_X_LOGO.png" alt="AGENT X"><h1>AGENT <span class="x">X</span></h1>
@@ -70,8 +73,9 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
 
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
-<div id="operations" class="page">
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
+
+<section id="operations" class="page">
 <div class="topline"><span>FILE 2045 — OPERATIONS</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
 
 <h2 class="file-title">FILE 2045 — العمليات</h2><p>بروتوكولات التواصل الخاصة بالفرقة.</p>
@@ -86,8 +90,9 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
 
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
-<div id="equipment" class="page">
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
+
+<section id="equipment" class="page">
 <div class="topline"><span>FILE 7319 — EQUIPMENT</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
 
 <h2 class="file-title">FILE 7319 — قسم العتاد</h2>
@@ -97,8 +102,9 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
 
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
-<div id="members" class="page">
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
+
+<section id="members" class="page">
 <div class="topline"><span>FILE 9901 — PERSONNEL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
 
 <h2 class="file-title">FILE 9901 — X PERSONNEL</h2><p>ملف الأعضاء المصرح لهم داخل AGENT X.</p>
@@ -111,8 +117,9 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
 
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
-<div id="deep" class="page">
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
+
+<section id="deep" class="page">
 <div class="topline"><span>FILE 1852022 — DEEP CLASSIFIED</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
 
 <h2 class="file-title">FILE 1852022 — DEEP CLASSIFIED</h2>
@@ -122,7 +129,8 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
 
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
+
 </main>
 </div>
 
@@ -134,39 +142,47 @@ const ROUTES = {
   "9901":"members",
   "1852022":"deep"
 };
-const gate=document.getElementById("gate");
-const box=document.getElementById("gatebox");
-const pass=document.getElementById("pass");
-const error=document.getElementById("error");
+
+const gate = document.getElementById("gate");
+const box = document.getElementById("gatebox");
+const pass = document.getElementById("pass");
+const error = document.getElementById("error");
 
 function showPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
+
 function verify(){
-  const target=ROUTES[pass.value.trim()];
+  const target = ROUTES[pass.value.trim()];
   if(target){
     showPage(target);
-    gate.style.display="none";
-    error.textContent="";
-    pass.value="";
+    gate.style.display = "none";
+    error.textContent = "";
+    pass.value = "";
   } else {
-    error.textContent="ACCESS DENIED — رمز الوصول غير صحيح";
+    error.textContent = "ACCESS DENIED — رمز الوصول غير صحيح";
     box.classList.remove("denied");
     void box.offsetWidth;
     box.classList.add("denied");
-    pass.value="";
+    pass.value = "";
     pass.focus();
   }
 }
+
 function backToGate(){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  gate.style.display="flex";
-  pass.value="";
-  error.textContent="";
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  gate.style.display = "flex";
+  pass.value = "";
+  error.textContent = "";
   pass.focus();
 }
-document.getElementById("enter").addEventListener("click",verify);
-pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
+
+document.getElementById("enter").addEventListener("click", verify);
+pass.addEventListener("keydown", e => {
+  if(e.key === "Enter") verify();
+});
 </script>
-</body></html>
+
+</body>
+</html>
