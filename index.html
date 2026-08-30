@@ -13,8 +13,9 @@ body{overflow-x:hidden}
 .sheet:before{content:"";position:absolute;inset:12px;border:1px solid #171717;pointer-events:none}
 .topline{display:flex;justify-content:space-between;gap:15px;color:#777;font:11px monospace;letter-spacing:2px;position:relative}
 .stamp{color:#b32626;border:1px solid #8f2222;padding:7px 12px;letter-spacing:2px;transform:rotate(-4deg)}
-.logo{text-align:center;padding:35px 0 22px;border-bottom:1px solid #333;position:relative}
-.logo h1{font-size:78px;letter-spacing:10px;margin:0;font-weight:900} .x{color:#b52626}
+.logo{text-align:center;padding:28px 0 22px;border-bottom:1px solid #333;position:relative}
+.logo img{width:180px;max-width:45%;display:block;margin:0 auto 12px;filter:drop-shadow(0 0 10px rgba(170,30,30,.25))}
+.logo h1{font-size:78px;letter-spacing:10px;margin:0;font-weight:900}.x{color:#b52626}
 .sub{font-size:20px;color:#aaa;margin-top:8px}
 .badge{display:inline-block;margin-top:18px;border:1px solid #777;padding:9px 18px;font:12px monospace;letter-spacing:2px}
 .hero{font-size:20px;text-align:center;color:#ddd;padding:25px 15px;border-bottom:1px solid #333;line-height:1.9}
@@ -23,12 +24,12 @@ p,li{color:#ccc;line-height:1.9;font-size:16px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .card{border:1px solid #333;padding:20px;background:#101010;position:relative}
 .card:after{content:"X";position:absolute;left:14px;bottom:7px;color:#191919;font-size:48px;font-weight:900}
-
-
-
 .footer{text-align:center;color:#777;margin-top:28px;letter-spacing:2px;font:12px monospace}
-[contenteditable]{outline:none;border-bottom:1px dashed transparent}
-[contenteditable]:focus{border-bottom-color:#a22}
+.final-statement{text-align:center;margin-top:42px;padding:32px 18px;border-top:1px solid #333;border-bottom:1px solid #333}
+.final-mark{font-size:58px;font-weight:900;color:#a22;letter-spacing:8px}
+.final-statement h2{border:0;padding:0;margin:8px 0;color:#c33}
+.final-statement p{font-size:20px;color:#ddd}
+.signature{margin-top:18px;color:#a22;font-family:monospace;letter-spacing:4px;font-size:13px}
 
 #gate{position:fixed;inset:0;background:#020202;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
 .gatebox{width:min(470px,100%);border:1px solid #4a4a4a;background:linear-gradient(145deg,#101010,#050505);padding:34px;text-align:center;position:relative;box-shadow:0 0 50px rgba(0,0,0,.8)}
@@ -43,12 +44,26 @@ p,li{color:#ccc;line-height:1.9;font-size:16px}
 .secretline{font:10px monospace;color:#666;letter-spacing:2px;margin-top:20px}
 .denied{animation:shake .18s linear 2}
 @keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(7px)}50%{transform:translateX(-7px)}75%{transform:translateX(5px)}100%{transform:translateX(0)}}
-.final-statement{text-align:center;margin-top:42px;padding:32px 18px;border-top:1px solid #333;border-bottom:1px solid #333}
-.final-mark{font-size:58px;font-weight:900;color:#a22;letter-spacing:8px}
-.final-statement h2{border:0;padding:0;margin:8px 0;color:#c33}
-.final-statement p{font-size:20px;color:#ddd}
-.signature{margin-top:18px;color:#a22;font-family:monospace;letter-spacing:4px;font-size:13px}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}}
+
+#content{display:none}
+#content.unlocked{display:block}
+.member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.member-card{border:1px solid #333;background:#101010;padding:14px;text-align:center;position:relative}
+.member-card img{width:100%;height:250px;object-fit:cover;object-position:center;border:1px solid #444}
+.member-code{font:12px monospace;color:#a22;letter-spacing:2px;margin-top:12px}
+.member-name{font-size:19px;font-weight:bold;margin-top:8px}
+.member-role{color:#bbb;margin-top:7px}
+.ops-table{width:100%;border-collapse:collapse;margin-top:18px}
+.ops-table th,.ops-table td{border:1px solid #444;padding:12px;text-align:right;vertical-align:top}
+.ops-table th{background:#151515;color:#c33}
+.ops-table td{color:#ddd}
+.note{border:1px solid #5a2929;background:#110707;padding:15px;margin-top:18px;color:#ccc}
+.back{display:block;margin:20px auto 0;width:240px;height:44px;background:#333;color:#fff;border:1px solid #555;cursor:pointer}
+.file-title{font-family:monospace;letter-spacing:2px;color:#a22}
+@media(max-width:700px){
+ .grid{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}
+ .member-grid{grid-template-columns:1fr}.member-card img{height:300px}
+}
 @media print{#gate,.controls{display:none!important}body{background:#fff}.sheet{background:#fff;color:#111;box-shadow:none}.card,.qr{background:#fff;border-color:#888}p,li,.sub,.hero{color:#222}.footer,.code{color:#333}}
 </style>
 </head>
@@ -59,89 +74,123 @@ p,li{color:#ccc;line-height:1.9;font-size:16px}
     <div class="gatex">X</div>
     <h1>AGENT X</h1>
     <div class="access">SECURE TERMINAL • X COMMAND</div>
-    <p>هذا الملف مصنف وسري.<br>يجب التحقق من رمز الوصول قبل عرض محتويات الملف.</p>
+    <p>هذا الملف مصنف وسري.<br>أدخل رمز الوصول لفتح الملف المصرح لك به.</p>
     <input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off">
     <button id="enter" type="button">VERIFY ACCESS</button>
     <div id="error" aria-live="polite"></div>
-    <div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div>
+    <div class="secretline">CLEARANCE: X • EYES ONLY</div>
   </div>
 </div>
 
+<div id="content">
 <div class="wrap">
-
-
 <main class="sheet">
-<div class="topline"><span>FILE: AGENT-X / 001</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
+<div class="topline">
+<span>FILE: AGENT-X / CLASSIFIED</span>
+<span>STATUS: ACTIVE</span>
+<span class="stamp">X ONLY</span>
+</div>
 
 <header class="logo">
+<img src="AGENT_X_LOGO.png" alt="AGENT X Logo">
 <h1>AGENT <span class="x">X</span></h1>
 <div class="sub">الفرقة السرية التابعة لـ X</div>
 <div class="badge">X COMMAND • EYES ONLY • AUTHORIZED PERSONNEL</div>
 </header>
 
+<section id="home">
 <section class="hero">
-AGENT X هي فرقة سرية خاصة تعمل تحت  <b>X</b> فقط.<br>
+AGENT X هي فرقة سرية خاصة تعمل تحت <b>X</b> فقط.<br>
 لا تتبع لأي جهة أخرى، وجميع صلاحياتها وقراراتها تعود إلى قيادة X.
 </section>
 
 <h2>الملف التعريفي</h2>
-<p>AGENT X فرقة عمليات سرية تم إنشاؤها لتنفيذ المهام الحساسة التي تتطلب أعلى درجات السرية والانضباط. وجوه اعضاء الفرقة غير معلنه، ولا يتم الكشف عن أعضائها أو مهامها إلا بتصريح من  X.</p>
+<p>AGENT X فرقة عمليات سرية تم إنشاؤها لتنفيذ المهام الحساسة التي تتطلب أعلى درجات السرية والانضباط. وجوه أعضاء الفرقة غير معلنة، ولا يتم الكشف عن أعضائها أو مهامها إلا بتصريح من X.</p>
 
 <div class="grid">
-<section class="card">
-<h2>التبعية الرسمية</h2>
-<p><b>الجهة الوحيدة: X</b></p>
-<p>AGENT X ليست فرقة مستقلة وليست تابعة لأي منظمة أخرى. مصدر الأوامر والصلاحيات هو قيادة X فقط.</p>
-</section>
-
-<section class="card">
-<h2>طبيعة الفرقة</h2>
-<ul>
-<li>فرقة سرية</li>
-<li>هوية الأعضاء غير معلنة</li>
-<li>المعلومات مصنفة سرية</li>
-<li>العمل وفق قوانين الفرقة </li>
-</ul>
-</section>
-
-<section class="card">
-<h2>الاختصاص</h2>
-<p>التعامل مع المهام الخاصة، جمع المعلومات، الدعم السري، والعمليات التي تحددها الفرقة  X .</p>
-</section>
-
-<section class="card">
-<h2>سلسلة القيادة</h2>
-<p><b>X COMMAND</b><br>↓<br><b>AGENT X</b><br>↓<br>أعضاء الفرقة</p>
-</section>
+<section class="card"><h2>التبعية الرسمية</h2><p><b>الجهة الوحيدة: X</b></p><p>AGENT X ليست فرقة مستقلة وليست تابعة لأي منظمة أخرى. مصدر الأوامر والصلاحيات هو قيادة X فقط.</p></section>
+<section class="card"><h2>طبيعة الفرقة</h2><ul><li>فرقة سرية</li><li>هوية الأعضاء غير معلنة</li><li>المعلومات مصنفة سرية</li><li>العمل وفق قوانين الفرقة</li></ul></section>
+<section class="card"><h2>الاختصاص</h2><p>التعامل مع المهام الخاصة، جمع المعلومات، الدعم السري، والعمليات التي تحددها الفرقة X.</p></section>
+<section class="card"><h2>سلسلة القيادة</h2><p><b>X COMMAND</b><br>↓<br><b>AGENT X</b><br>↓<br>أعضاء الفرقة</p></section>
 </div>
 
 <h2>قانون السرية</h2>
-<p>معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالوحدة يصدر من  X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.</p>
+<p>معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالفرقة يصدر من X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.</p>
 
 <div class="final-statement">
-<div class="final-mark">X</div>
-<h2>الخاتمة</h2>
+<div class="final-mark">X</div><h2>الخاتمة</h2>
 <p>إذا وصلت إلى هنا، فقد عرفت أكثر مما يجب.</p>
 <div class="signature">— X COMMAND —</div>
 </div>
+</section>
 
+<section id="operations" class="hidden">
+<h2 class="file-title">FILE 2045 — العمليات</h2>
+<p>بروتوكولات التواصل الخاصة بالفرقة.</p>
+<table class="ops-table">
+<thead><tr><th>العبارة</th><th>المعنى</th></tr></thead>
+<tbody>
+<tr><td><b>الجو حار اليوم</b></td><td>اني في خطر — تجهزوا</td></tr>
+<tr><td><b>السمي صافيه</b></td><td>استعدوا</td></tr>
+<tr><td><b>وين موجودين يشباب</b></td><td>اجمعوا في الصفر</td></tr>
+<tr><td><b>شن وضعكم</b></td><td>تستخدم وقت اجتماعات العصابات ومعناها: البسوا لبس الفرقة وتجمعوا مع بعض</td></tr>
+</tbody>
+</table>
+<div class="note"><b>تنبيه:</b> جميع البروتوكولات تستخدم في <b>Dark Chat</b> وليست الراديو.</div>
+</section>
+
+<section id="equipment" class="hidden">
+<h2 class="file-title">FILE 7319 — قسم العتاد</h2>
+<p>صفحة مخصصة لمعلومات المعدات والتجهيزات داخل الـRP.</p>
+<div class="card"><h2>التصنيف</h2><p>CLASSIFIED • EQUIPMENT</p></div>
+</section>
+
+<section id="members" class="hidden">
+<h2 class="file-title">FILE 9901 — X PERSONNEL</h2>
+<p>ملف الأعضاء المصرح لهم داخل AGENT X.</p>
+<div class="member-grid">
+<div class="member-card"><img src="X-01.png" alt="X-01"><div class="member-code">X-01</div><div class="member-name">Yossef Mojber</div><div class="member-role">قائد ميداني</div></div>
+<div class="member-card"><img src="X-02.jpeg" alt="X-02"><div class="member-code">X-02</div><div class="member-name">مهيمن الخوجه</div><div class="member-role">مسؤول العتاد</div></div>
+<div class="member-card"><img src="X-03.png" alt="X-03"><div class="member-code">X-03</div><div class="member-name">كاسيو نيرو</div><div class="member-role">عميل</div></div>
 </div>
+</section>
+
+<section id="deep" class="hidden">
+<h2 class="file-title">FILE 1852022 — DEEP CLASSIFIED</h2>
+<p>ملف شديد السرية مخصص للمعلومات الخاصة التي تريد حفظها داخل سيناريو الـRP.</p>
+<div class="card"><h2>X COMMAND</h2><p>هذا القسم مصنف: <b>DEEP CLASSIFIED</b></p></div>
+</section>
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY • SILENCE IS SURVIVAL</div>
-</main></div>
+</main>
+</div>
+</div>
 
 <script>
-const ACCESS_CODE = "8226121";
-const gate = document.getElementById("gate");
-const gatebox = document.getElementById("gatebox");
-const pass = document.getElementById("pass");
-const error = document.getElementById("error");
+const ACCESS={
+  "8226121":"home",
+  "X-2045":"operations",
+  "X-7319":"equipment",
+  "X-9901":"members",
+  "X-1852022":"deep"
+};
+
+const gate=document.getElementById("gate");
+const content=document.getElementById("content");
+const pass=document.getElementById("pass");
+const error=document.getElementById("error");
+const gatebox=document.getElementById("gatebox");
 
 function verify(){
-  if(pass.value === ACCESS_CODE){
+  const target=ACCESS[pass.value];
+  if(target){
+    document.querySelectorAll("#content section[id]").forEach(s=>s.classList.add("hidden"));
+    document.getElementById(target).classList.remove("hidden");
+    content.classList.add("unlocked");
     gate.style.display="none";
     error.textContent="";
-  } else {
+  }else{
     error.textContent="ACCESS DENIED — رمز الوصول غير صحيح";
     gatebox.classList.remove("denied");
     void gatebox.offsetWidth;
@@ -152,8 +201,6 @@ function verify(){
 }
 document.getElementById("enter").addEventListener("click",verify);
 pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
-
-
 </script>
 </body>
 </html>
