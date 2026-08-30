@@ -1,5 +1,5 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>AGENT X — TERMINAL</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>FILE 9901 — PERSONNEL</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030303;color:#eee;font-family:Arial,Tahoma,sans-serif}
 body{overflow-x:hidden}.wrap{max-width:1050px;margin:auto;padding:22px}
@@ -26,19 +26,23 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 .member-code{font:12px monospace;color:#a22;letter-spacing:2px;margin-top:12px}.member-name{font-size:19px;font-weight:bold;margin-top:8px}.member-role{color:#bbb;margin-top:7px}
 @media(max-width:700px){.grid,.member-grid{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}}
 </style></head><body>
-<div class="wrap"><main class="sheet">
-<div class="topline"><span>AGENT-X / TERMINAL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
-<header class="logo"><img src="AGENT_X_LOGO.png" alt="AGENT X"><h1>AGENT <span class="x">X</span></h1>
-<div class="sub">الفرقة السرية التابعة لـ X</div><div class="badge">X COMMAND • EYES ONLY</div></header>
-<section class="hero">اختر الملف المطلوب ثم أدخل رمز الوصول الخاص به.</section>
-<nav class="nav">
-<a href="home.html">الرئيسية<br>8226121</a>
-<a href="operations.html">FILE 2045<br>العمليات</a>
-<a href="equipment.html">FILE 7319<br>العتاد</a>
-<a href="members.html">FILE 9901<br>الأعضاء</a>
-<a href="deep.html">FILE 1852022<br>سري جدًا</a>
-</nav>
-<div class="card"><h2>تنبيه أمني</h2><p>كل ملف له واجهته المستقلة ورمز الوصول الخاص به. الرجوع من أي ملف يعيدك إلى شاشة AGENT X.</p></div>
+<div class="wrap"><div class="gate" id="gate"><div class="gx">X</div><h1>AGENT X</h1>
+<div class="file-title">FILE 9901 — PERSONNEL</div><p>أدخل رمز الوصول لفتح هذا الملف.</p>
+<input id="pass" type="password" placeholder="ACCESS CODE" autocomplete="off"><button id="verify">VERIFY ACCESS</button>
+<div class="err" id="err"></div></div>
+<main class="sheet" id="file" style="display:none">
+<div class="topline"><span>FILE 9901 — PERSONNEL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
+<h2 class="file-title">FILE 9901 — X PERSONNEL</h2><p>ملف الأعضاء المصرح لهم داخل AGENT X.</p>
+<div class="member-grid">
+<div class="member-card"><img src="X-01.png" alt="X-01"><div class="member-code">X-01</div><div class="member-name">Yossef Mojber</div><div class="member-role">قائد ميداني</div></div>
+<div class="member-card"><img src="X-02.jpeg" alt="X-02"><div class="member-code">X-02</div><div class="member-name">مهيمن الخوجه</div><div class="member-role">مسؤول العتاد</div></div>
+<div class="member-card"><img src="X-03.png" alt="X-03"><div class="member-code">X-03</div><div class="member-name">كاسيو نيرو</div><div class="member-role">عميل</div></div>
+</div>
+
+<a class="return" href="index.html">RETURN TO X TERMINAL</a>
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
-</main></div>
-<script></script></body></html>
+</main></div><script>const CODE='X-9901';const p=document.getElementById('pass'),e=document.getElementById('err');
+function verify(){if(p.value===CODE){document.getElementById('gate').style.display='none';document.getElementById('file').style.display='block';}
+else{e.textContent='ACCESS DENIED — رمز الوصول غير صحيح';p.value='';p.focus();}}
+document.getElementById('verify').onclick=verify;p.onkeydown=x=>{if(x.key==='Enter')verify()};</script></body></html>

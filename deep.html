@@ -1,5 +1,5 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>AGENT X — TERMINAL</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>FILE 1852022 — DEEP CLASSIFIED</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030303;color:#eee;font-family:Arial,Tahoma,sans-serif}
 body{overflow-x:hidden}.wrap{max-width:1050px;margin:auto;padding:22px}
@@ -26,19 +26,20 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 .member-code{font:12px monospace;color:#a22;letter-spacing:2px;margin-top:12px}.member-name{font-size:19px;font-weight:bold;margin-top:8px}.member-role{color:#bbb;margin-top:7px}
 @media(max-width:700px){.grid,.member-grid{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}}
 </style></head><body>
-<div class="wrap"><main class="sheet">
-<div class="topline"><span>AGENT-X / TERMINAL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
-<header class="logo"><img src="AGENT_X_LOGO.png" alt="AGENT X"><h1>AGENT <span class="x">X</span></h1>
-<div class="sub">الفرقة السرية التابعة لـ X</div><div class="badge">X COMMAND • EYES ONLY</div></header>
-<section class="hero">اختر الملف المطلوب ثم أدخل رمز الوصول الخاص به.</section>
-<nav class="nav">
-<a href="home.html">الرئيسية<br>8226121</a>
-<a href="operations.html">FILE 2045<br>العمليات</a>
-<a href="equipment.html">FILE 7319<br>العتاد</a>
-<a href="members.html">FILE 9901<br>الأعضاء</a>
-<a href="deep.html">FILE 1852022<br>سري جدًا</a>
-</nav>
-<div class="card"><h2>تنبيه أمني</h2><p>كل ملف له واجهته المستقلة ورمز الوصول الخاص به. الرجوع من أي ملف يعيدك إلى شاشة AGENT X.</p></div>
+<div class="wrap"><div class="gate" id="gate"><div class="gx">X</div><h1>AGENT X</h1>
+<div class="file-title">FILE 1852022 — DEEP CLASSIFIED</div><p>أدخل رمز الوصول لفتح هذا الملف.</p>
+<input id="pass" type="password" placeholder="ACCESS CODE" autocomplete="off"><button id="verify">VERIFY ACCESS</button>
+<div class="err" id="err"></div></div>
+<main class="sheet" id="file" style="display:none">
+<div class="topline"><span>FILE 1852022 — DEEP CLASSIFIED</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
+<h2 class="file-title">FILE 1852022 — DEEP CLASSIFIED</h2>
+<p>ملف شديد السرية مخصص للمعلومات الخاصة التي تريد حفظها داخل سيناريو الـRP.</p>
+<div class="card"><h2>X COMMAND</h2><p>هذا القسم مصنف: <b>DEEP CLASSIFIED</b></p></div>
+
+<a class="return" href="index.html">RETURN TO X TERMINAL</a>
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
-</main></div>
-<script></script></body></html>
+</main></div><script>const CODE='X-1852022';const p=document.getElementById('pass'),e=document.getElementById('err');
+function verify(){if(p.value===CODE){document.getElementById('gate').style.display='none';document.getElementById('file').style.display='block';}
+else{e.textContent='ACCESS DENIED — رمز الوصول غير صحيح';p.value='';p.focus();}}
+document.getElementById('verify').onclick=verify;p.onkeydown=x=>{if(x.key==='Enter')verify()};</script></body></html>

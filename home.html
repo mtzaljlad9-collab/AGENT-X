@@ -1,5 +1,5 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>AGENT X — TERMINAL</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>HOME — AGENT X / 001</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030303;color:#eee;font-family:Arial,Tahoma,sans-serif}
 body{overflow-x:hidden}.wrap{max-width:1050px;margin:auto;padding:22px}
@@ -26,19 +26,29 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 .member-code{font:12px monospace;color:#a22;letter-spacing:2px;margin-top:12px}.member-name{font-size:19px;font-weight:bold;margin-top:8px}.member-role{color:#bbb;margin-top:7px}
 @media(max-width:700px){.grid,.member-grid{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}}
 </style></head><body>
-<div class="wrap"><main class="sheet">
-<div class="topline"><span>AGENT-X / TERMINAL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+<div class="wrap"><div class="gate" id="gate"><div class="gx">X</div><h1>AGENT X</h1>
+<div class="file-title">HOME — AGENT X / 001</div><p>أدخل رمز الوصول لفتح هذا الملف.</p>
+<input id="pass" type="password" placeholder="ACCESS CODE" autocomplete="off"><button id="verify">VERIFY ACCESS</button>
+<div class="err" id="err"></div></div>
+<main class="sheet" id="file" style="display:none">
+<div class="topline"><span>HOME — AGENT X / 001</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
 <header class="logo"><img src="AGENT_X_LOGO.png" alt="AGENT X"><h1>AGENT <span class="x">X</span></h1>
-<div class="sub">الفرقة السرية التابعة لـ X</div><div class="badge">X COMMAND • EYES ONLY</div></header>
-<section class="hero">اختر الملف المطلوب ثم أدخل رمز الوصول الخاص به.</section>
-<nav class="nav">
-<a href="home.html">الرئيسية<br>8226121</a>
-<a href="operations.html">FILE 2045<br>العمليات</a>
-<a href="equipment.html">FILE 7319<br>العتاد</a>
-<a href="members.html">FILE 9901<br>الأعضاء</a>
-<a href="deep.html">FILE 1852022<br>سري جدًا</a>
-</nav>
-<div class="card"><h2>تنبيه أمني</h2><p>كل ملف له واجهته المستقلة ورمز الوصول الخاص به. الرجوع من أي ملف يعيدك إلى شاشة AGENT X.</p></div>
+<div class="sub">الفرقة السرية التابعة لـ X</div><div class="badge">X COMMAND • EYES ONLY • AUTHORIZED PERSONNEL</div></header>
+<section class="hero">AGENT X هي فرقة سرية خاصة تعمل تحت <b>X</b> فقط.<br>لا تتبع لأي جهة أخرى، وجميع صلاحياتها وقراراتها تعود إلى قيادة X.</section>
+<h2>الملف التعريفي</h2><p>AGENT X فرقة عمليات سرية تم إنشاؤها لتنفيذ المهام الحساسة التي تتطلب أعلى درجات السرية والانضباط. وجوه أعضاء الفرقة غير معلنة، ولا يتم الكشف عن أعضائها أو مهامها إلا بتصريح من X.</p>
+<div class="grid">
+<section class="card"><h2>التبعية الرسمية</h2><p><b>الجهة الوحيدة: X</b></p><p>AGENT X ليست فرقة مستقلة وليست تابعة لأي منظمة أخرى. مصدر الأوامر والصلاحيات هو قيادة X فقط.</p></section>
+<section class="card"><h2>طبيعة الفرقة</h2><ul><li>فرقة سرية</li><li>هوية الأعضاء غير معلنة</li><li>المعلومات مصنفة سرية</li><li>العمل وفق قوانين الفرقة</li></ul></section>
+<section class="card"><h2>الاختصاص</h2><p>التعامل مع المهام الخاصة، جمع المعلومات، الدعم السري، والعمليات التي تحددها الفرقة X.</p></section>
+<section class="card"><h2>سلسلة القيادة</h2><p><b>X COMMAND</b><br>↓<br><b>AGENT X</b><br>↓<br>أعضاء الفرقة</p></section>
+</div>
+<h2>قانون السرية</h2><p>معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالفرقة يصدر من X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.</p>
+<div class="final-statement card" style="text-align:center"><div style="font-size:58px;font-weight:900;color:#a22">X</div><h2>الخاتمة</h2><p>إذا وصلت إلى هنا، فقد عرفت أكثر مما يجب.</p><div style="color:#a22;font-family:monospace">— X COMMAND —</div></div>
+
+<a class="return" href="index.html">RETURN TO X TERMINAL</a>
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
-</main></div>
-<script></script></body></html>
+</main></div><script>const CODE='8226121';const p=document.getElementById('pass'),e=document.getElementById('err');
+function verify(){if(p.value===CODE){document.getElementById('gate').style.display='none';document.getElementById('file').style.display='block';}
+else{e.textContent='ACCESS DENIED — رمز الوصول غير صحيح';p.value='';p.focus();}}
+document.getElementById('verify').onclick=verify;p.onkeydown=x=>{if(x.key==='Enter')verify()};</script></body></html>
