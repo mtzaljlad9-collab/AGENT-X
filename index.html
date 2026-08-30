@@ -1,6 +1,7 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>AGENT X — TERMINAL</title>
-<style>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AGENT X — X COMMAND</title><style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030303;color:#eee;font-family:Arial,Tahoma,sans-serif}
 body{overflow-x:hidden}.wrap{max-width:1050px;margin:auto;padding:22px}
 .sheet{background:linear-gradient(145deg,#0d0d0d,#060606);border:1px solid #3f3f3f;padding:30px;position:relative;box-shadow:0 0 40px rgba(0,0,0,.5)}
@@ -25,20 +26,125 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 .member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.member-card{border:1px solid #333;background:#101010;padding:14px;text-align:center}.member-card img{width:100%;height:250px;object-fit:cover;border:1px solid #444}
 .member-code{font:12px monospace;color:#a22;letter-spacing:2px;margin-top:12px}.member-name{font-size:19px;font-weight:bold;margin-top:8px}.member-role{color:#bbb;margin-top:7px}
 @media(max-width:700px){.grid,.member-grid{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}}
-</style></head><body>
+
+.return{display:block;margin:28px auto 0;width:260px;height:44px;background:#333;color:#fff;border:1px solid #555;cursor:pointer}
+.return:hover{border-color:#a22}.page{display:none}.page.active{display:block}
+</style></head>
+<body>
+<div id="gate">
+  <div class="gatebox" id="gatebox">
+    <div class="gatex">X</div><h1>AGENT X</h1>
+    <div class="access">SECURE TERMINAL • X COMMAND</div>
+    <p>هذا الملف مصنف وسري.<br>يجب التحقق من رمز الوصول قبل عرض محتويات الملف.</p>
+    <input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off">
+    <button id="enter" type="button">VERIFY ACCESS</button>
+    <div id="error" aria-live="polite"></div>
+    <div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div>
+  </div>
+</div>
+
 <div class="wrap"><main class="sheet">
-<div class="topline"><span>AGENT-X / TERMINAL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+<div id="home" class="page active">
+<div class="topline"><span>HOME — AGENT X / 001</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
 <header class="logo"><img src="AGENT_X_LOGO.png" alt="AGENT X"><h1>AGENT <span class="x">X</span></h1>
-<div class="sub">الفرقة السرية التابعة لـ X</div><div class="badge">X COMMAND • EYES ONLY</div></header>
-<section class="hero">اختر الملف المطلوب ثم أدخل رمز الوصول الخاص به.</section>
-<nav class="nav">
-<a href="home.html">الرئيسية<br>8226121</a>
-<a href="operations.html">FILE 2045<br>العمليات</a>
-<a href="equipment.html">FILE 7319<br>العتاد</a>
-<a href="members.html">FILE 9901<br>الأعضاء</a>
-<a href="deep.html">FILE 1852022<br>سري جدًا</a>
-</nav>
-<div class="card"><h2>تنبيه أمني</h2><p>كل ملف له واجهته المستقلة ورمز الوصول الخاص به. الرجوع من أي ملف يعيدك إلى شاشة AGENT X.</p></div>
+<div class="sub">الفرقة السرية التابعة لـ X</div><div class="badge">X COMMAND • EYES ONLY • AUTHORIZED PERSONNEL</div></header>
+<section class="hero">AGENT X هي فرقة سرية خاصة تعمل تحت <b>X</b> فقط.<br>لا تتبع لأي جهة أخرى، وجميع صلاحياتها وقراراتها تعود إلى قيادة X.</section>
+<h2>الملف التعريفي</h2><p>AGENT X فرقة عمليات سرية تم إنشاؤها لتنفيذ المهام الحساسة التي تتطلب أعلى درجات السرية والانضباط. وجوه أعضاء الفرقة غير معلنة، ولا يتم الكشف عن أعضائها أو مهامها إلا بتصريح من X.</p>
+<div class="grid">
+<section class="card"><h2>التبعية الرسمية</h2><p><b>الجهة الوحيدة: X</b></p><p>AGENT X ليست فرقة مستقلة وليست تابعة لأي منظمة أخرى. مصدر الأوامر والصلاحيات هو قيادة X فقط.</p></section>
+<section class="card"><h2>طبيعة الفرقة</h2><ul><li>فرقة سرية</li><li>هوية الأعضاء غير معلنة</li><li>المعلومات مصنفة سرية</li><li>العمل وفق قوانين الفرقة</li></ul></section>
+<section class="card"><h2>الاختصاص</h2><p>التعامل مع المهام الخاصة، جمع المعلومات، الدعم السري، والعمليات التي تحددها الفرقة X.</p></section>
+<section class="card"><h2>سلسلة القيادة</h2><p><b>X COMMAND</b><br>↓<br><b>AGENT X</b><br>↓<br>أعضاء الفرقة</p></section>
+</div>
+<h2>قانون السرية</h2><p>معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالفرقة يصدر من X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.</p>
+<div class="final-statement card" style="text-align:center"><div style="font-size:58px;font-weight:900;color:#a22">X</div><h2>الخاتمة</h2><p>إذا وصلت إلى هنا، فقد عرفت أكثر مما يجب.</p><div style="color:#a22;font-family:monospace">— X COMMAND —</div></div>
+
+
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
+<div id="operations" class="page">
+<div class="topline"><span>FILE 2045 — OPERATIONS</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
+<h2 class="file-title">FILE 2045 — العمليات</h2><p>بروتوكولات التواصل الخاصة بالفرقة.</p>
+<table class="ops-table"><thead><tr><th>العبارة</th><th>المعنى</th></tr></thead><tbody>
+<tr><td><b>الجو حار اليوم</b></td><td>اني في خطر — تجهزوا</td></tr>
+<tr><td><b>السمي صافيه</b></td><td>استعدوا</td></tr>
+<tr><td><b>وين موجودين يشباب</b></td><td>اجمعوا في الصفر</td></tr>
+<tr><td><b>شن وضعكم</b></td><td>تستخدم وقت اجتماعات العصابات ومعناها: البسوا لبس الفرقة وتجمعوا مع بعض</td></tr>
+</tbody></table>
+<div class="card" style="margin-top:18px"><b>تنبيه:</b> جميع البروتوكولات تستخدم في <b>Dark Chat</b> وليست الراديو.</div>
+
+
+<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
+<div id="equipment" class="page">
+<div class="topline"><span>FILE 7319 — EQUIPMENT</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
+<h2 class="file-title">FILE 7319 — قسم العتاد</h2>
+<p>صفحة مخصصة لمعلومات المعدات والتجهيزات داخل الـRP.</p>
+<div class="card"><h2>التصنيف</h2><p>CLASSIFIED • EQUIPMENT</p></div>
+
+
+<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
+<div id="members" class="page">
+<div class="topline"><span>FILE 9901 — PERSONNEL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
+<h2 class="file-title">FILE 9901 — X PERSONNEL</h2><p>ملف الأعضاء المصرح لهم داخل AGENT X.</p>
+<div class="member-grid">
+<div class="member-card"><img src="X-01.png" alt="X-01"><div class="member-code">X-01</div><div class="member-name">Yossef Mojber</div><div class="member-role">قائد ميداني</div></div>
+<div class="member-card"><img src="X-02.jpeg" alt="X-02"><div class="member-code">X-02</div><div class="member-name">مهيمن الخوجه</div><div class="member-role">مسؤول العتاد</div></div>
+<div class="member-card"><img src="X-03.png" alt="X-03"><div class="member-code">X-03</div><div class="member-name">كاسيو نيرو</div><div class="member-role">عميل</div></div>
+</div>
+
+
+<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
+<div id="deep" class="page">
+<div class="topline"><span>FILE 1852022 — DEEP CLASSIFIED</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+
+<h2 class="file-title">FILE 1852022 — DEEP CLASSIFIED</h2>
+<p>ملف شديد السرية مخصص للمعلومات الخاصة التي تريد حفظها داخل سيناريو الـRP.</p>
+<div class="card"><h2>X COMMAND</h2><p>هذا القسم مصنف: <b>DEEP CLASSIFIED</b></p></div>
+
+
+<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
 </main></div>
-<script></script></body></html>
+
+<script>
+const ROUTES = {
+  "8226121":"home",
+  "X-2045":"operations",
+  "X-7319":"equipment",
+  "X-9901":"members",
+  "X-1852022":"deep"
+};
+const gate=document.getElementById("gate"), box=document.getElementById("gatebox"),
+pass=document.getElementById("pass"), error=document.getElementById("error");
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+function verify(){
+  const target=ROUTES[pass.value.trim()];
+  if(target){
+    showPage(target); gate.style.display="none"; error.textContent="";
+    pass.value="";
+  } else {
+    error.textContent="ACCESS DENIED — رمز الوصول غير صحيح";
+    box.classList.remove("denied"); void box.offsetWidth; box.classList.add("denied");
+    pass.value=""; pass.focus();
+  }
+}
+function backToGate(){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("home").classList.add("active");
+  gate.style.display="flex"; pass.value=""; error.textContent=""; pass.focus();
+}
+document.getElementById("enter").addEventListener("click",verify);
+pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
+</script>
+</body></html>
