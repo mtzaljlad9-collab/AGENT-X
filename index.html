@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AGENT X — X COMMAND</title><style>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AGENT X — X COMMAND</title>
+<style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030303;color:#eee;font-family:Arial,Tahoma,sans-serif}
 body{overflow-x:hidden}.wrap{max-width:1050px;margin:auto;padding:22px}
 .sheet{background:linear-gradient(145deg,#0d0d0d,#060606);border:1px solid #3f3f3f;padding:30px;position:relative;box-shadow:0 0 40px rgba(0,0,0,.5)}
@@ -27,23 +29,28 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 .member-code{font:12px monospace;color:#a22;letter-spacing:2px;margin-top:12px}.member-name{font-size:19px;font-weight:bold;margin-top:8px}.member-role{color:#bbb;margin-top:7px}
 @media(max-width:700px){.grid,.member-grid{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}}
 
+.page{display:none}.page.active{display:block}
 .return{display:block;margin:28px auto 0;width:260px;height:44px;background:#333;color:#fff;border:1px solid #555;cursor:pointer}
-.return:hover{border-color:#a22}.page{display:none}.page.active{display:block}
-</style></head>
+.return:hover{border-color:#a22}
+</style>
+</head>
 <body>
+
 <div id="gate">
   <div class="gatebox" id="gatebox">
-    <div class="gatex">X</div><h1>AGENT X</h1>
+    <div class="gatex">X</div>
+    <h1>AGENT X</h1>
     <div class="access">SECURE TERMINAL • X COMMAND</div>
-    <p>هذا الملف مصنف وسري.<br>يجب التحقق من رمز الوصول قبل عرض محتويات الملف.</p>
+    <p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p>
     <input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off">
     <button id="enter" type="button">VERIFY ACCESS</button>
     <div id="error" aria-live="polite"></div>
-    <div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div>
+    <div class="secretline">CLEARANCE: X • EYES ONLY</div>
   </div>
 </div>
 
-<div class="wrap"><main class="sheet">
+<div class="wrap">
+<main class="sheet">
 <div id="home" class="page active">
 <div class="topline"><span>HOME — AGENT X / 001</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
 
@@ -62,6 +69,7 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+
 <button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
 <div id="operations" class="page">
 <div class="topline"><span>FILE 2045 — OPERATIONS</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
@@ -77,6 +85,7 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+
 <button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
 <div id="equipment" class="page">
 <div class="topline"><span>FILE 7319 — EQUIPMENT</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
@@ -87,6 +96,7 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+
 <button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
 <div id="members" class="page">
 <div class="topline"><span>FILE 9901 — PERSONNEL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
@@ -100,6 +110,7 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+
 <button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
 <div id="deep" class="page">
 <div class="topline"><span>FILE 1852022 — DEEP CLASSIFIED</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
@@ -110,19 +121,23 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 
 
 <div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
+
 <button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></div>
-</main></div>
+</main>
+</div>
 
 <script>
 const ROUTES = {
   "8226121":"home",
-  "X-2045":"operations",
-  "X-7319":"equipment",
-  "X-9901":"members",
-  "X-1852022":"deep"
+  "2045":"operations",
+  "7319":"equipment",
+  "9901":"members",
+  "1852022":"deep"
 };
-const gate=document.getElementById("gate"), box=document.getElementById("gatebox"),
-pass=document.getElementById("pass"), error=document.getElementById("error");
+const gate=document.getElementById("gate");
+const box=document.getElementById("gatebox");
+const pass=document.getElementById("pass");
+const error=document.getElementById("error");
 
 function showPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -131,18 +146,25 @@ function showPage(id){
 function verify(){
   const target=ROUTES[pass.value.trim()];
   if(target){
-    showPage(target); gate.style.display="none"; error.textContent="";
+    showPage(target);
+    gate.style.display="none";
+    error.textContent="";
     pass.value="";
   } else {
     error.textContent="ACCESS DENIED — رمز الوصول غير صحيح";
-    box.classList.remove("denied"); void box.offsetWidth; box.classList.add("denied");
-    pass.value=""; pass.focus();
+    box.classList.remove("denied");
+    void box.offsetWidth;
+    box.classList.add("denied");
+    pass.value="";
+    pass.focus();
   }
 }
 function backToGate(){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById("home").classList.add("active");
-  gate.style.display="flex"; pass.value=""; error.textContent=""; pass.focus();
+  gate.style.display="flex";
+  pass.value="";
+  error.textContent="";
+  pass.focus();
 }
 document.getElementById("enter").addEventListener("click",verify);
 pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
