@@ -38,10 +38,11 @@ html,body{width:100%;min-height:100%;margin:0}
 body.gate-open{overflow:hidden!important}
 #gate{
   position:fixed!important;
-  left:0!important;top:0!important;
-  width:100vw!important;height:100vh!important;
-  min-width:100%!important;min-height:100%!important;
-  margin:0!important;padding:20px!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100vh!important;
+  margin:0!important;
+  padding:20px!important;
   background:#020202!important;
   z-index:2147483647!important;
   display:flex!important;
@@ -51,11 +52,55 @@ body.gate-open{overflow:hidden!important}
   visibility:visible!important;
 }
 #gate .gatebox{
-  width:min(470px,100%)!important;
-  max-height:calc(100vh - 40px);
-  overflow:auto;
+  width:min(820px,92vw)!important;
+  min-height:620px!important;
+  max-height:calc(100vh - 40px)!important;
+  overflow:auto!important;
   background:linear-gradient(145deg,#101010,#050505)!important;
-  opacity:1!important;
+  border:1px solid #555!important;
+  padding:52px 70px!important;
+  box-shadow:0 0 50px rgba(0,0,0,.8)!important;
+}
+#gate .gatex{
+  font-size:88px!important;
+  margin-bottom:8px!important;
+}
+#gate .gatebox h1{
+  font-size:42px!important;
+  margin:10px 0 14px!important;
+}
+#gate .access{
+  font-size:15px!important;
+  margin-bottom:28px!important;
+}
+#gate .gatebox p{
+  font-size:18px!important;
+  margin-bottom:24px!important;
+}
+#gate .gatebox input{
+  width:100%!important;
+  height:64px!important;
+  margin:14px 0!important;
+  font-size:22px!important;
+  letter-spacing:6px!important;
+}
+#gate .gatebox button{
+  width:100%!important;
+  height:64px!important;
+  font-size:16px!important;
+}
+#gate .secretline{
+  font-size:12px!important;
+  margin-top:28px!important;
+}
+@media(max-width:700px){
+  #gate .gatebox{
+    width:94vw!important;
+    min-height:auto!important;
+    padding:36px 24px!important;
+  }
+  #gate .gatex{font-size:70px!important}
+  #gate .gatebox h1{font-size:32px!important}
 }
 #gate[style*="display: none"]{display:none!important}
 </style>
