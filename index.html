@@ -33,9 +33,34 @@ h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;marg
 .page{display:none}.page.active{display:block}
 .return{display:block;margin:28px auto 0;width:260px;height:44px;background:#333;color:#fff;border:1px solid #555;cursor:pointer}
 .return:hover{border-color:#a22}
+
+html,body{width:100%;min-height:100%;margin:0}
+body.gate-open{overflow:hidden!important}
+#gate{
+  position:fixed!important;
+  left:0!important;top:0!important;
+  width:100vw!important;height:100vh!important;
+  min-width:100%!important;min-height:100%!important;
+  margin:0!important;padding:20px!important;
+  background:#020202!important;
+  z-index:2147483647!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+#gate .gatebox{
+  width:min(470px,100%)!important;
+  max-height:calc(100vh - 40px);
+  overflow:auto;
+  background:linear-gradient(145deg,#101010,#050505)!important;
+  opacity:1!important;
+}
+#gate[style*="display: none"]{display:none!important}
 </style>
 </head>
-<body>
+<body class="gate-open">
 
 <!-- نفس واجهة الدخول المطلوبة: بدون أي مربعات للملفات -->
 <div id="gate">
@@ -150,14 +175,30 @@ const error = document.getElementById("error");
 
 function showPage(id){
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+  const page = document.getElementById(id);
+  if(page) page.classList.add("active");
+}
+
+function openGate(){
+  // Always reset the previous session/page before accepting a new code.
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  gate.style.display = "flex";
+  document.body.classList.add("gate-open");
+  pass.value = "";
+  error.textContent = "";
+  box.classList.remove("denied");
+  requestAnimationFrame(() => pass.focus());
 }
 
 function verify(){
-  const target = ROUTES[pass.value.trim()];
+  // Read the current input every time; do not reuse the previous code.
+  const code = String(pass.value || "").trim();
+  const target = ROUTES[code];
+
   if(target){
     showPage(target);
     gate.style.display = "none";
+    document.body.classList.remove("gate-open");
     error.textContent = "";
     pass.value = "";
   } else {
@@ -171,11 +212,7 @@ function verify(){
 }
 
 function backToGate(){
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  gate.style.display = "flex";
-  pass.value = "";
-  error.textContent = "";
-  pass.focus();
+  openGate();
 }
 
 document.getElementById("enter").addEventListener("click", verify);
