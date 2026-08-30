@@ -103,6 +103,40 @@ body.gate-open{overflow:hidden!important}
   #gate .gatebox h1{font-size:32px!important}
 }
 #gate[style*="display: none"]{display:none!important}
+
+/* AGENT X — MATCHED FIRST SCREEN */
+#gate{
+  background:#030303!important;
+  color:#eee!important;
+}
+#gate .gatebox{
+  background:linear-gradient(145deg,#0d0d0d,#060606)!important;
+  border:1px solid #3f3f3f!important;
+  box-shadow:0 0 40px rgba(0,0,0,.75)!important;
+  text-align:center!important;
+}
+#gate .gate-logo{
+  display:block!important;
+  width:150px!important;
+  height:150px!important;
+  object-fit:contain!important;
+  margin:8px auto 22px!important;
+  filter:drop-shadow(0 0 12px rgba(181,38,38,.22));
+}
+#gate .gatex{color:#b52626!important}
+#gate .access{color:#b32626!important}
+#gate .gatebox input{
+  background:#030303!important;
+  border:1px solid #555!important;
+  color:#fff!important;
+}
+#gate .gatebox button{
+  background:#9f2222!important;
+  color:#fff!important;
+}
+#gate .gatebox button:hover{background:#b32626!important}
+#gate .secretline{color:#666!important}
+
 </style>
 </head>
 <body class="gate-open">
@@ -113,6 +147,7 @@ body.gate-open{overflow:hidden!important}
     <div class="gatex">X</div>
     <h1>AGENT X</h1>
     <div class="access">SECURE TERMINAL • X COMMAND</div>
+    <img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X">
     <p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p>
     <input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off">
     <button id="enter" type="button">VERIFY ACCESS</button>
