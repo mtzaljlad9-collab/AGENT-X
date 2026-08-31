@@ -1,305 +1,270 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AGENT X — X COMMAND</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030303;color:#eee;font-family:Arial,Tahoma,sans-serif}
-body{overflow-x:hidden}.wrap{max-width:1050px;margin:auto;padding:22px}
-.sheet{background:linear-gradient(145deg,#0d0d0d,#060606);border:1px solid #3f3f3f;padding:30px;position:relative;box-shadow:0 0 40px rgba(0,0,0,.5)}
-.sheet:before{content:"";position:absolute;inset:12px;border:1px solid #171717;pointer-events:none}
-.topline{display:flex;justify-content:space-between;gap:15px;color:#777;font:11px monospace;letter-spacing:2px;position:relative}
-.stamp{color:#b32626;border:1px solid #8f2222;padding:7px 12px;letter-spacing:2px;transform:rotate(-4deg)}
-.logo{text-align:center;padding:28px 0 22px;border-bottom:1px solid #333}.logo img{width:180px;max-width:45%;display:block;margin:0 auto 12px}
-.logo h1{font-size:78px;letter-spacing:10px;margin:0;font-weight:900}.x{color:#b52626}.sub{font-size:20px;color:#aaa;margin-top:8px}
-.badge{display:inline-block;margin-top:18px;border:1px solid #777;padding:9px 18px;font:12px monospace;letter-spacing:2px}
-.hero{font-size:20px;text-align:center;color:#ddd;padding:25px 15px;border-bottom:1px solid #333;line-height:1.9}
-h2{font-size:23px;color:#c33;border-right:4px solid #a22;padding-right:12px;margin-top:30px}p,li{color:#ccc;line-height:1.9;font-size:16px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{border:1px solid #333;padding:20px;background:#101010;position:relative}
-.card:after{content:"X";position:absolute;left:14px;bottom:7px;color:#191919;font-size:48px;font-weight:900}
-.footer{text-align:center;color:#777;margin-top:28px;letter-spacing:2px;font:12px monospace}
-.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:22px 0}.nav a,.return{display:flex;align-items:center;justify-content:center;min-height:48px;background:#111;color:#ddd;border:1px solid #444;text-decoration:none;padding:10px;text-align:center;font-weight:bold}
-.nav a:hover,.return:hover{border-color:#a22}.return{width:260px;margin:28px auto 0;cursor:pointer}
-.gate{max-width:480px;margin:80px auto 20px;border:1px solid #444;background:#0b0b0b;padding:30px;text-align:center}
-.gate .gx{font-size:65px;color:#a22;font-weight:900}.gate input{width:100%;height:50px;margin:15px 0;background:#030303;border:1px solid #555;color:#fff;text-align:center;font-size:18px;letter-spacing:5px}
-.gate button{width:100%;height:50px;background:#9f2222;border:0;color:#fff;font-weight:bold;letter-spacing:2px;cursor:pointer}
-.err{color:#c44;min-height:22px;margin-top:10px}.file-title{font-family:monospace;letter-spacing:2px;color:#a22}
-.ops-table{width:100%;border-collapse:collapse;margin-top:18px}.ops-table th,.ops-table td{border:1px solid #444;padding:12px;text-align:right;vertical-align:top}.ops-table th{background:#151515;color:#c33}
-.member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.member-card{border:1px solid #333;background:#101010;padding:14px;text-align:center}.member-card img{width:100%;height:250px;object-fit:cover;border:1px solid #444}
-.member-code{font:12px monospace;color:#a22;letter-spacing:2px;margin-top:12px}.member-name{font-size:19px;font-weight:bold;margin-top:8px}.member-role{color:#bbb;margin-top:7px}
-@media(max-width:700px){.grid,.member-grid{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.logo h1{font-size:50px}.topline{flex-direction:column}}
+:root{--red:#c62828;--red2:#ff3434;--bg:#030303;--panel:#0b0b0b;--line:#2b2b2b;--muted:#858585;--green:#39c46a}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:#eee;font-family:Arial,Tahoma,sans-serif}body{min-height:100vh;overflow-x:hidden}
+#gate{position:fixed;inset:0;background:#020202;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px}
+.gatebox{width:min(760px,94vw);background:linear-gradient(145deg,#0d0d0d,#050505);border:1px solid #454545;padding:42px 58px;text-align:center;box-shadow:0 0 70px #000;position:relative}.gatebox:before{content:"CLASSIFIED";position:absolute;top:13px;left:18px;color:#8d2020;font:10px monospace;letter-spacing:3px}
+.gatex{font-size:88px;font-weight:900;color:var(--red);letter-spacing:9px;text-shadow:0 0 22px #8b1717}.gatebox h1{font-size:42px;letter-spacing:7px;margin:0 0 12px}.access{color:#c02a2a;font:15px monospace;letter-spacing:3px;margin-bottom:18px}.gate-logo{width:145px;height:145px;object-fit:contain;display:block;margin:5px auto 20px;filter:drop-shadow(0 0 12px rgba(198,40,40,.35))}.gatebox p{font-size:17px;color:#bbb;line-height:1.9}.gatebox input{width:100%;height:62px;margin:14px 0;background:#030303;border:1px solid #555;color:#fff;text-align:center;font-size:22px;letter-spacing:6px}.gatebox button{width:100%;height:62px;background:#a52222;border:0;color:#fff;font-weight:bold;letter-spacing:3px;cursor:pointer}.gatebox button:hover{background:#c62828}.error{color:#f04a4a;min-height:24px;margin-top:10px}.secretline{font:11px monospace;color:#666;letter-spacing:2px;margin-top:24px}
+#app{display:none}.layout{display:grid;grid-template-columns:230px 1fr;min-height:100vh}.side{background:#050505;border-left:1px solid #222;padding:18px;position:sticky;top:0;height:100vh}.brand{text-align:center;border-bottom:1px solid #222;padding-bottom:20px}.brand img{width:115px}.brand h1{margin:5px 0;font-size:26px;letter-spacing:4px}.brand small{color:#777;font:10px monospace}.nav{margin-top:18px;display:grid;gap:7px}.nav button{background:#090909;border:1px solid #242424;color:#aaa;padding:13px 12px;text-align:right;cursor:pointer;font-weight:bold}.nav button:hover,.nav button.active{border-color:#8f2222;background:linear-gradient(90deg,#160707,#090909);color:#fff}.side-status{margin-top:30px;border:1px solid #222;padding:14px;font:11px monospace;color:#777}.online{color:var(--green)}
+main{padding:22px;min-width:0}.topbar{display:flex;justify-content:space-between;gap:15px;align-items:center;border-bottom:1px solid #292929;padding:12px 5px 18px;font:11px monospace;color:#777}.stamp{color:#c33;border:1px solid #7e2020;padding:7px 12px;transform:rotate(-3deg)}.page{display:none}.page.active{display:block}.title{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:28px 0 18px}.title h2{margin:0;color:#ddd;font-size:32px;letter-spacing:2px}.title p{margin:0;color:#777}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:linear-gradient(145deg,#0e0e0e,#070707);border:1px solid #292929;padding:18px;position:relative}.metric{font:11px monospace;color:#777}.metric b{display:block;font-size:30px;color:#eee;margin-top:8px}.red{color:#e52b2b!important}.green{color:var(--green)!important}.section{margin-top:18px}.section h3{color:#d13a3a;border-right:3px solid #8e2222;padding-right:9px}.two{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.timeline{display:grid;gap:10px}.event{border-right:2px solid #8e2222;padding:10px 14px;background:#0b0b0b}.event small{color:#666;font:10px monospace}.event b{display:block;margin-top:5px}.terminal{background:#020202;border:1px solid #252525;padding:16px;font:12px monospace;line-height:1.8;color:#9f9f9f}.terminal .ok{color:var(--green)}.terminal .warn{color:#e33}.ops-table{width:100%;border-collapse:collapse}.ops-table th,.ops-table td{border:1px solid #333;padding:12px;text-align:right}.ops-table th{background:#121212;color:#e33}.ops-table td{color:#ccc}.members{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.member{background:#0b0b0b;border:1px solid #2c2c2c;padding:12px}.member img{width:100%;height:230px;object-fit:cover;border:1px solid #444;background:#111}.code{color:#e33;font:11px monospace;letter-spacing:2px;margin-top:10px}.member h3{margin:7px 0}.role{color:#aaa}.details{margin-top:12px;border-top:1px solid #252525;padding-top:10px;font-size:13px;line-height:1.9;color:#aaa}.secret{border:1px solid #551919;background:radial-gradient(circle at 75% 25%,#220606,#070707 55%);padding:22px}.secret-head{display:flex;justify-content:space-between;align-items:center}.secret-head img{width:120px}.profile{display:grid;grid-template-columns:280px 1fr;gap:20px}.portrait{width:100%;height:390px;object-fit:cover;filter:grayscale(1) contrast(1.15);border:1px solid #5a1c1c}.quote{font-size:19px;line-height:2.1;color:#ddd}.quote strong{color:#e22}.hidden-box{display:none;margin-top:14px;padding:18px;border:1px solid #6b2020;background:#100303;color:#ddd;line-height:2}.hidden-box.show{display:block}.btn{background:#111;color:#ddd;border:1px solid #444;padding:11px 16px;cursor:pointer}.btn:hover{border-color:#a22}.footer{border-top:1px solid #222;margin-top:30px;padding:18px;text-align:center;color:#555;font:10px monospace;letter-spacing:2px}.back{margin-top:18px;width:100%}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{position:relative;height:auto}.nav{grid-template-columns:repeat(2,1fr)}.grid,.members{grid-template-columns:repeat(2,1fr)}.two,.three,.profile{grid-template-columns:1fr}}
+@media(max-width:600px){.gatebox{padding:35px 20px}.gatex{font-size:65px}.gatebox h1{font-size:30px}.grid,.members{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.profile{grid-template-columns:1fr}}
 
-.page{display:none}.page.active{display:block}
-.return{display:block;margin:28px auto 0;width:260px;height:44px;background:#333;color:#fff;border:1px solid #555;cursor:pointer}
-.return:hover{border-color:#a22}
-
-html,body{width:100%;min-height:100%;margin:0}
-body.gate-open{overflow:hidden!important}
-#gate{
-  position:fixed!important;
-  inset:0!important;
-  width:100vw!important;
-  height:100vh!important;
-  margin:0!important;
-  padding:20px!important;
-  background:#020202!important;
-  z-index:2147483647!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  opacity:1!important;
-  visibility:visible!important;
+#lockdown{
+ position:fixed;inset:0;z-index:2147483646;display:none;
+ align-items:center;justify-content:center;text-align:center;
+ background:radial-gradient(circle at center,#260606 0,#080202 38%,#000 100%);
+ color:#fff;padding:20px;
 }
-#gate .gatebox{
-  width:min(820px,92vw)!important;
-  min-height:620px!important;
-  max-height:calc(100vh - 40px)!important;
-  overflow:auto!important;
-  background:linear-gradient(145deg,#101010,#050505)!important;
-  border:1px solid #555!important;
-  padding:52px 70px!important;
-  box-shadow:0 0 50px rgba(0,0,0,.8)!important;
+#lockdown.active{display:flex!important}
+#lockdown:before{
+ content:"";position:absolute;inset:16px;border:1px solid #6e1717;
+ box-shadow:inset 0 0 60px rgba(180,20,20,.08);
+ pointer-events:none;
 }
-#gate .gatex{
-  font-size:88px!important;
-  margin-bottom:8px!important;
+.lockbox{width:min(720px,94vw);position:relative;padding:45px 30px;border:1px solid #7a2222;background:rgba(5,5,5,.94);box-shadow:0 0 60px rgba(160,20,20,.25)}
+.lock-x{font-size:80px;font-weight:900;color:#c32222;letter-spacing:10px}
+.lock-title{font:900 32px Arial;letter-spacing:5px;color:#eee;margin-top:8px}
+.lock-status{margin-top:18px;color:#e12a2a;font:700 15px monospace;letter-spacing:3px}
+.lock-line{margin-top:26px;color:#888;font:12px monospace;letter-spacing:2px}
+#lockTimer{margin:28px 0 10px;font:900 64px monospace;letter-spacing:5px;color:#fff}
+.lock-small{color:#777;font:11px monospace;letter-spacing:2px}
+#abortLock{margin-top:28px;background:#151515;border:1px solid #642222;color:#aaa;padding:12px 22px;cursor:pointer}
+#abortLock:hover{color:#fff;border-color:#a22}
+
+.lock-warning-ar{
+  margin:20px auto 4px;
+  padding:18px 20px;
+  max-width:650px;
+  border-top:1px solid #5d1b1b;
+  border-bottom:1px solid #5d1b1b;
+  color:#ddd;
+  font:18px Arial,Tahoma,sans-serif;
+  line-height:2;
 }
-#gate .gatebox h1{
-  font-size:42px!important;
-  margin:10px 0 14px!important;
+.lock-warning-ar b{color:#e12a2a}
+
+.random-denied-message{
+  margin-top:10px;
+  padding:10px 8px;
+  color:#b32626;
+  font-size:13px;
+  line-height:1.7;
+  min-height:42px;
+  letter-spacing:.3px;
 }
-#gate .access{
-  font-size:15px!important;
-  margin-bottom:28px!important;
-}
-#gate .gatebox p{
-  font-size:18px!important;
-  margin-bottom:24px!important;
-}
-#gate .gatebox input{
-  width:100%!important;
-  height:64px!important;
-  margin:14px 0!important;
-  font-size:22px!important;
-  letter-spacing:6px!important;
-}
-#gate .gatebox button{
-  width:100%!important;
-  height:64px!important;
-  font-size:16px!important;
-}
-#gate .secretline{
-  font-size:12px!important;
-  margin-top:28px!important;
-}
-@media(max-width:700px){
-  #gate .gatebox{
-    width:94vw!important;
-    min-height:auto!important;
-    padding:36px 24px!important;
-  }
-  #gate .gatex{font-size:70px!important}
-  #gate .gatebox h1{font-size:32px!important}
-}
-#gate[style*="display: none"]{display:none!important}
+</style></head>
+<body>
+<div id="gate"><div class="gatebox" id="gatebox"><div class="gatex">X</div><h1>AGENT X</h1><div class="access">SECURE TERMINAL • X COMMAND</div><img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X"><p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p><input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off"><button id="enter">VERIFY ACCESS</button><div id="error" class="error"></div><div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div></div></div>
+<div id="app"><div class="layout">
+<aside class="side"><div class="brand"><img src="AGENT_X_LOGO.png"><h1>AGENT X</h1><small>X COMMAND • SECURE NETWORK</small></div><div class="nav">
+<button data-page="dashboard">▣ لوحة القيادة</button><button data-page="members">♙ الأعضاء</button><button data-page="operations">◉ العمليات</button><button data-page="secret">▣ الملف السري</button><button data-page="chat">▣ DARK CHAT</button><button data-page="equipment">⚙ العتاد</button><button data-page="reports">▤ التقارير</button><button data-page="intelligence">◉ الاستخبارات</button></div><div class="side-status">SYSTEM STATUS<br><span class="online">● ONLINE</span><br><br>CLEARANCE<br><span class="red">LEVEL X</span></div></aside>
+<main>
+<section id="dashboard" class="page"><div class="topbar"><span>HOME / DASHBOARD</span><span class="stamp">CLASSIFIED</span></div><div class="title"><div><h2>X COMMAND — DASHBOARD</h2><p>المركز الرئيسي لنظام AGENT X</p></div></div><div class="grid"><div class="card metric">ACTIVE AGENTS<b>04</b></div><div class="card metric">CLASSIFIED FILES<b>05</b></div><div class="card metric">SYSTEM STATUS<b class="green">ONLINE</b></div><div class="card metric">CLEARANCE<b class="red">LEVEL X</b></div></div><div class="two section"><div class="card"><h3>آخر نشاطات النظام</h3><div class="timeline"><div class="event"><small>09:42 — SYSTEM</small><b>تم فتح جلسة X COMMAND</b></div><div class="event"><small>09:18 — FILE 9901</small><b>تم تحديث ملف الأعضاء</b></div><div class="event"><small>08:55 — FILE 1852022</small><b>تم تأمين الملف السري</b></div></div></div><div class="card"><h3>SECURE TERMINAL</h3><div class="terminal"><span class="ok">[ONLINE]</span> X NETWORK<br><span class="ok">[SECURE]</span> ENCRYPTION ACTIVE<br><span class="warn">[CLASSIFIED]</span> ACCESS LEVEL X<br><br>ALL SYSTEMS NOMINAL.</div></div></div><div class="card section"><h3>رسالة النظام</h3><p>هذا النظام لا يعرض إلا المعلومات المصرح بها. كل ملف له رمز وصول مستقل.</p></div></section>
 
-/* AGENT X — MATCHED FIRST SCREEN */
-#gate{
-  background:#030303!important;
-  color:#eee!important;
-}
-#gate .gatebox{
-  background:linear-gradient(145deg,#0d0d0d,#060606)!important;
-  border:1px solid #3f3f3f!important;
-  box-shadow:0 0 40px rgba(0,0,0,.75)!important;
-  text-align:center!important;
-}
-#gate .gate-logo{
-  display:block!important;
-  width:150px!important;
-  height:150px!important;
-  object-fit:contain!important;
-  margin:8px auto 22px!important;
-  filter:drop-shadow(0 0 12px rgba(181,38,38,.22));
-}
-#gate .gatex{color:#b52626!important}
-#gate .access{color:#b32626!important}
-#gate .gatebox input{
-  background:#030303!important;
-  border:1px solid #555!important;
-  color:#fff!important;
-}
-#gate .gatebox button{
-  background:#9f2222!important;
-  color:#fff!important;
-}
-#gate .gatebox button:hover{background:#b32626!important}
-#gate .secretline{color:#666!important}
+<section id="members" class="page"><div class="topbar"><span>FILE 9901 / PERSONNEL</span><span class="stamp">X ONLY</span></div><div class="title"><div><h2>ملفات الأعضاء</h2><p>كل عميل له سجل مستقل</p></div></div><div class="members">
+<div class="member"><img src="X-01.png"><div class="code">X-01</div><h3>Youssef alkomse</h3><div class="role">قائد ميداني</div><div class="details">الهوية الوطنية: <b>FRL12058</b><br>الهاتف: <span class="red">لم يُضف بعد</span></div></div>
+<div class="member"><img src="X-02.jpeg"><div class="code">X-02</div><h3>مهيمن الخوجه</h3><div class="role">مسؤول العتاد</div><div class="details">الهوية الوطنية: <span class="red">معلقة</span><br>الهاتف: <b>0922092614</b></div></div>
+<div class="member"><img src="X-03.png"><div class="code">X-03</div><h3>كاسيو نيرو</h3><div class="role">عميل</div><div class="details">الهوية الوطنية: <span class="red">معلقة</span><br>الهاتف: <span class="red">لم يُضف بعد</span></div></div>
+<div class="member"><img src="X-04.jpeg"><div class="code">X-04</div><h3>Lucian Kazmiri</h3><div class="role">عميل</div><div class="details">الهوية الوطنية: <b>XFR51196</b><br>الهاتف: <span class="red">لم يُضف بعد</span></div></div></div></section>
 
-</style>
-</head>
-<body class="gate-open">
+<section id="operations" class="page"><div class="topbar"><span>FILE 2045 / OPERATIONS</span><span class="stamp">CLASSIFIED</span></div><div class="title"><div><h2>ملف العمليات</h2><p>بروتوكولات التواصل داخل سيناريو AGENT X</p></div></div><table class="ops-table"><tr><th>العبارة</th><th>المعنى</th></tr><tr><td>الجو حار اليوم</td><td>اني في خطر — تجهزوا</td></tr><tr><td>السمي صافيه</td><td>استعدوا</td></tr><tr><td>وين موجودين يشباب</td><td>اجمعوا في الصفر</td></tr><tr><td>شن وضعكم</td><td>تستخدم وقت اجتماعات العصابات ومعناها: البسوا لبس الفرقة وتجمعوا مع بعض</td></tr></table><div class="card section"><b class="red">تنبيه:</b> جميع البروتوكولات تستخدم في <b>Dark Chat</b> وليست الراديو.</div></section>
 
-<!-- نفس واجهة الدخول المطلوبة: بدون أي مربعات للملفات -->
-<div id="gate">
-  <div class="gatebox" id="gatebox">
-    <div class="gatex">X</div>
-    <h1>AGENT X</h1>
-    <div class="access">SECURE TERMINAL • X COMMAND</div>
-    <img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X">
-    <p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p>
-    <input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off">
-    <button id="enter" type="button">VERIFY ACCESS</button>
-    <div id="error" aria-live="polite"></div>
-    <div class="secretline">CLEARANCE: X • EYES ONLY</div>
-  </div>
-</div>
+<section id="secret" class="page"><div class="topbar"><span>FILE 1852022 / DEEP CLASSIFIED</span><span class="stamp">TOP SECRET</span></div><div class="secret"><div class="secret-head"><div><div class="code">FILE CODE</div><div style="font:42px monospace;color:#e22;letter-spacing:7px">1852022</div></div><img src="AGENT_X_LOGO.png"></div><div class="title"><div><h2>PERSONAL DOSSIER</h2><p>IDENTITY: UNKNOWN</p></div></div><div class="profile"><div><img class="portrait" src="AGENT_X_LOGO.png" alt="Unknown identity"><div class="details">NAME: <b>Dark elcarncero</b><br>RANK: <b>قائد الجهاز</b><br>CODE: <b>AGENT X</b><br>STATUS: <span class="red">UNKNOWN</span></div></div><div><h3 class="red">ABOUT X</h3><div class="quote">X هو خبير السلاح، وهو شخص غامض جدًا.<br>لا يُعرف عن نفسه لأي شخص.<br>كان يتواجد ويختفي بدون علم أحد.<br>لو وصلت إلى هذا المكان، فـ <strong>X وثق فيك حقًا.</strong><br><br>لا أحد يعرف حقيقته، ولا أحد يعرف أين يظهر أو متى يختفي.</div><div class="card section"><b class="red">SECRET NOTE</b><p>إذا وصلت إلى هذا الملف، فهذا يعني أن X أرادك أن تصل إليه.</p><p><strong>لا تحاول معرفة من هو X.</strong></p></div></div></div></div></section>
 
-<div class="wrap">
-<main class="sheet">
+<section id="chat" class="page"><div class="topbar"><span>DARK CHAT / SECURE COMMUNICATION</span><span class="stamp">ENCRYPTED</span></div><div class="title"><div><h2>DARK CHAT</h2><p>واجهة محادثة شكلية داخل عالم AGENT X</p></div></div><div class="terminal"><span class="ok">[SECURE CHANNEL]</span> X-01 connected.<br><span class="ok">[SECURE CHANNEL]</span> X-02 connected.<br><span class="warn">[NOTICE]</span> Messages are classified.<br><br><b>CHANNEL: X COMMAND</b><br>لا توجد رسائل جديدة.<br><br><span class="red">SYSTEM:</span> استخدم هذه الواجهة داخل سيناريو الـRP فقط.</div><div class="card section"><h3>رسالة مثبتة</h3><p>السرية أولاً. لا يتم تداول ملفات AGENT X خارج الأشخاص المصرح لهم.</p></div></section>
 
-<section id="home" class="page">
-<div class="topline"><span>HOME — AGENT X / 001</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
+<section id="equipment" class="page"><div class="topbar"><span>FILE 7319 / EQUIPMENT</span><span class="stamp">X ONLY</span></div><div class="title"><div><h2>العتاد</h2><p>سجل تجهيزات الفرقة</p></div></div><div class="three"><div class="card"><h3>التصنيف</h3><p>CLASSIFIED EQUIPMENT</p></div><div class="card"><h3>المسؤول</h3><p>مهيمن الخوجه — X-02</p></div><div class="card"><h3>الحالة</h3><p class="green">READY</p></div></div></section>
 
-<header class="logo"><img src="AGENT_X_LOGO.png" alt="AGENT X"><h1>AGENT <span class="x">X</span></h1>
-<div class="sub">الفرقة السرية التابعة لـ X</div><div class="badge">X COMMAND • EYES ONLY • AUTHORIZED PERSONNEL</div></header>
-<section class="hero">AGENT X هي فرقة سرية خاصة تعمل تحت <b>X</b> فقط.<br>لا تتبع لأي جهة أخرى، وجميع صلاحياتها وقراراتها تعود إلى قيادة X.</section>
-<h2>الملف التعريفي</h2><p>AGENT X فرقة عمليات سرية تم إنشاؤها لتنفيذ المهام الحساسة التي تتطلب أعلى درجات السرية والانضباط. وجوه أعضاء الفرقة غير معلنة، ولا يتم الكشف عن أعضائها أو مهامها إلا بتصريح من X.</p>
-<div class="grid">
-<section class="card"><h2>التبعية الرسمية</h2><p><b>الجهة الوحيدة: X</b></p><p>AGENT X ليست فرقة مستقلة وليست تابعة لأي منظمة أخرى. مصدر الأوامر والصلاحيات هو قيادة X فقط.</p></section>
-<section class="card"><h2>طبيعة الفرقة</h2><ul><li>فرقة سرية</li><li>هوية الأعضاء غير معلنة</li><li>المعلومات مصنفة سرية</li><li>العمل وفق قوانين الفرقة</li></ul></section>
-<section class="card"><h2>الاختصاص</h2><p>التعامل مع المهام الخاصة، جمع المعلومات، الدعم السري، والعمليات التي تحددها الفرقة X.</p></section>
-<section class="card"><h2>سلسلة القيادة</h2><p><b>X COMMAND</b><br>↓<br><b>AGENT X</b><br>↓<br>أعضاء الفرقة</p></section>
-</div>
-<h2>قانون السرية</h2><p>معلومات AGENT X لا يتم تداولها خارج الأشخاص المصرح لهم. أي قرار يتعلق بالفرقة يصدر من X، وأي شخص لا يملك تصريحًا لا يحق له الاطلاع على ملفاتها.</p>
-<div class="final-statement card" style="text-align:center"><div style="font-size:58px;font-weight:900;color:#a22">X</div><h2>الخاتمة</h2><p>إذا وصلت إلى هنا، فقد عرفت أكثر مما يجب.</p><div style="color:#a22;font-family:monospace">— X COMMAND —</div></div>
+<section id="reports" class="page"><div class="topbar"><span>REPORTS / X COMMAND</span><span class="stamp">CLASSIFIED</span></div><div class="title"><div><h2>التقارير</h2><p>سجل تقارير داخلي</p></div></div><div class="timeline"><div class="event"><small>REPORT 001</small><b>إنشاء وحدة AGENT X</b><p>الوحدة تعمل تحت X COMMAND فقط.</p></div><div class="event"><small>REPORT 002</small><b>تحديث ملفات الأعضاء</b><p>تم تسجيل X-01 إلى X-04.</p></div><div class="event"><small>REPORT 003</small><b>تأمين الملف 1852022</b><p>الوصول مقيد بمستوى X.</p></div></div></section>
 
+<section id="intelligence" class="page"><div class="topbar"><span>INTELLIGENCE / CLASSIFIED</span><span class="stamp">EYES ONLY</span></div><div class="title"><div><h2>الاستخبارات</h2><p>معلومات غير مكتملة — بعضها متعمد</p></div></div><div class="two"><div class="card"><h3>ملخص</h3><p>لا توجد صورة كاملة لـ X. بعض السجلات ناقصة، وبعضها لم يُكتب أصلًا.</p><button class="btn" onclick="reveal(1)">كشف رسالة مخفية</button><div id="hidden1" class="hidden-box">«أحيانًا، أكثر معلومة مهمة هي المعلومة التي لم تُكتب.»</div></div><div class="card"><h3>سجل غير مكتمل</h3><div class="terminal">IDENTITY: UNKNOWN<br>ORIGIN: UNKNOWN<br>LAST LOCATION: CLASSIFIED<br>REASON FOR ABSENCE: UNKNOWN<br><br><span class="warn">DATA INCOMPLETE...</span></div><br><button class="btn" onclick="reveal(2)">فتح الملاحظة السرية</button><div id="hidden2" class="hidden-box">«إذا رأيت أثرًا لـ X، فربما كان يريدك أن تراه.»</div></div></div></section>
 
-<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
-
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
-
-<section id="operations" class="page">
-<div class="topline"><span>FILE 2045 — OPERATIONS</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
-
-<h2 class="file-title">FILE 2045 — العمليات</h2><p>بروتوكولات التواصل الخاصة بالفرقة.</p>
-<table class="ops-table"><thead><tr><th>العبارة</th><th>المعنى</th></tr></thead><tbody>
-<tr><td><b>الجو حار اليوم</b></td><td>اني في خطر — تجهزوا</td></tr>
-<tr><td><b>السمي صافيه</b></td><td>استعدوا</td></tr>
-<tr><td><b>وين موجودين يشباب</b></td><td>اجمعوا في الصفر</td></tr>
-<tr><td><b>شن وضعكم</b></td><td>تستخدم وقت اجتماعات العصابات ومعناها: البسوا لبس الفرقة وتجمعوا مع بعض</td></tr>
-</tbody></table>
-<div class="card" style="margin-top:18px"><b>تنبيه:</b> جميع البروتوكولات تستخدم في <b>Dark Chat</b> وليست الراديو.</div>
-
-
-<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
-
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
-
-<section id="equipment" class="page">
-<div class="topline"><span>FILE 7319 — EQUIPMENT</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
-
-<h2 class="file-title">FILE 7319 — قسم العتاد</h2>
-<p>صفحة مخصصة لمعلومات المعدات والتجهيزات داخل الـRP.</p>
-<div class="card"><h2>التصنيف</h2><p>CLASSIFIED • EQUIPMENT</p></div>
-
-
-<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
-
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
-
-<section id="members" class="page">
-<div class="topline"><span>FILE 9901 — PERSONNEL</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
-
-<h2 class="file-title">FILE 9901 — X PERSONNEL</h2><p>ملف الأعضاء المصرح لهم داخل AGENT X.</p>
-<div class="member-grid">
-<div class="member-card"><img src="X-01.png" alt="X-01"><div class="member-code">X-01</div><div class="member-name">Yossef Mojber</div><div class="member-role">قائد ميداني</div></div>
-<div class="member-card"><img src="X-02.jpeg" alt="X-02"><div class="member-code">X-02</div><div class="member-name">مهيمن الخوجه</div><div class="member-role">مسؤول العتاد</div></div>
-<div class="member-card"><img src="X-03.png" alt="X-03"><div class="member-code">X-03</div><div class="member-name">كاسيو نيرو</div><div class="member-role">عميل</div></div>
-</div>
-
-
-<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
-
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
-
-<section id="deep" class="page">
-<div class="topline"><span>FILE 1852022 — DEEP CLASSIFIED</span><span>STATUS: CLASSIFIED</span><span class="stamp">X ONLY</span></div>
-
-<h2 class="file-title">FILE 1852022 — DEEP CLASSIFIED</h2>
-<p>ملف شديد السرية مخصص للمعلومات الخاصة التي تريد حفظها داخل سيناريو الـRP.</p>
-<div class="card"><h2>X COMMAND</h2><p>هذا القسم مصنف: <b>DEEP CLASSIFIED</b></p></div>
-
-
-<div class="footer">AGENT X • X ONLY • CLASSIFIED • EYES ONLY</div>
-
-<button class="return" onclick="backToGate()">RETURN TO X TERMINAL</button></section>
-
-</main>
-</div>
-
+<div class="footer">AGENT X • X COMMAND • CLASSIFIED • EYES ONLY • SILENCE IS SURVIVAL</div>
+</main></div></div>
 <script>
-const ROUTES = {
-  "x9105":"home",
-  "x9910":"operations",
-  "7319":"equipment",
-  "xl11":"members",
-  "1852022":"deep"
-};
-
-const gate = document.getElementById("gate");
-const box = document.getElementById("gatebox");
-const pass = document.getElementById("pass");
-const error = document.getElementById("error");
-
-function showPage(id){
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  const page = document.getElementById(id);
-  if(page) page.classList.add("active");
-}
-
-function openGate(){
-  // Always reset the previous session/page before accepting a new code.
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  gate.style.display = "flex";
-  document.body.classList.add("gate-open");
-  pass.value = "";
-  error.textContent = "";
-  box.classList.remove("denied");
-  requestAnimationFrame(() => pass.focus());
-}
-
+const routes={"8226121":"dashboard","2045":"operations","7319":"equipment","9901":"members","1852022":"secret"};
+const gate=document.getElementById('gate'),app=document.getElementById('app'),pass=document.getElementById('pass'),error=document.getElementById('error'),box=document.getElementById('gatebox');
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const el=document.getElementById(id);if(el)el.classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo(0,0)}
+function openGate(){app.style.display='none';gate.style.display='flex';pass.value='';error.textContent='';pass.focus()}
 function verify(){
-  // Read the current input every time; do not reuse the previous code.
-  const code = String(pass.value || "").trim();
-  const target = ROUTES[code];
+  const code=String(pass.value||"").trim();
 
+  if(code===BIG_BOSS_CODE){
+    showPage("bigboss");
+    gate.style.display="none";
+    document.body.classList.remove("gate-open");
+    error.textContent="";
+    pass.value="";
+    return;
+  }
+
+  const target=ROUTES[code];
   if(target){
     showPage(target);
-    gate.style.display = "none";
+    gate.style.display="none";
     document.body.classList.remove("gate-open");
-    error.textContent = "";
-    pass.value = "";
-  } else {
-    error.textContent = "ACCESS DENIED — رمز الوصول غير صحيح";
+    error.textContent="";
+    pass.value="";
+    const denied=document.getElementById("random-denied-message");
+    if(denied) denied.textContent="";
+  }else{
+    error.textContent="ACCESS DENIED";
+    const denied=document.getElementById("random-denied-message");
+    if(denied){
+      const messages=[
+        "X لا يريدك أن ترى شيئًا.",
+        "أنت تبحث في المكان الخطأ.",
+        "لم يكن من المفترض أن تصل إلى هنا.",
+        "X يعرف أنك تحاول الدخول.",
+        "توقف عن البحث.",
+        "بعض الأبواب لا تُفتح بالرموز.",
+        "أنت تقترب أكثر مما ينبغي.",
+        "لا يوجد شيء هنا... أليس كذلك؟",
+        "X يراقب محاولاتك.",
+        "ارجع قبل أن تعرف أكثر مما يجب."
+      ];
+      let next=messages[Math.floor(Math.random()*messages.length)];
+      const previous=denied.dataset.last||"";
+      if(messages.length>1) while(next===previous) next=messages[Math.floor(Math.random()*messages.length)];
+      denied.dataset.last=next;
+      denied.textContent=next;
+    }
     box.classList.remove("denied");
     void box.offsetWidth;
     box.classList.add("denied");
-    pass.value = "";
+    pass.value="";
     pass.focus();
   }
 }
 
-function backToGate(){
-  openGate();
+function applyLock(endAt){
+  localStorage.setItem("AGENT_X_LOCKDOWN_UNTIL", String(endAt));
+  lockScreen.classList.add("active");
+  lockScreen.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+
+  clearInterval(lockInterval);
+  const tick=()=>{
+    const left=endAt-Date.now();
+    if(left<=0){ clearInterval(lockInterval); unlockSite(); return; }
+    lockTimer.textContent=formatTime(left);
+  };
+  tick();
+  lockInterval=setInterval(tick,250);
 }
 
-document.getElementById("enter").addEventListener("click", verify);
-pass.addEventListener("keydown", e => {
-  if(e.key === "Enter") verify();
-});
-</script>
+function unlockSite(){
+  localStorage.removeItem("AGENT_X_LOCKDOWN_UNTIL");
+  lockScreen.classList.remove("active");
+  lockScreen.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+  lockTimer.textContent="01:00:00";
+}
 
-</body>
-</html>
+function triggerLockdown(){
+  applyLock(Date.now()+LOCK_DURATION);
+}
+
+/* Hidden emergency code: 14112004 — not displayed anywhere in the interface. */
+function checkEmergencyCode(code){
+  if(String(code).trim()==="WELCOM-X"){
+    triggerLockdown();
+    return true;
+  }
+  return false;
+}
+
+/* Make the emergency code work from the existing access input. */
+const originalVerify = window.verify;
+if(typeof originalVerify === "function"){
+  window.verify = function(){
+    if(checkEmergencyCode(pass.value)){
+      pass.value="";
+      error.textContent="";
+      return;
+    }
+    return originalVerify();
+  };
+}
+
+abortLock.addEventListener("click",()=>{
+  /* Commander cancellation uses the separate WELCOM-X code.
+     The UI intentionally does not expose the code. */
+  const confirmCode = prompt("ENTER COMMANDER ABORT CODE");
+  if(confirmCode === "WELCOM-X"){
+    unlockSite();
+  }
+});
+
+/* Persist the one-hour lockdown across refreshes on the same browser. */
+const savedLock = Number(localStorage.getItem("AGENT_X_LOCKDOWN_UNTIL") || 0);
+if(savedLock > Date.now()) applyLock(savedLock);
+else if(savedLock) localStorage.removeItem("AGENT_X_LOCKDOWN_UNTIL");
+
+
+function openArchive(){
+  const a=document.getElementById("bossArchive");
+  if(a) a.style.display="block";
+}
+function openBossPage(id){
+  showPage(id);
+  return false;
+}
+function triggerLockdown(){
+  if(typeof applyLockdown === "function"){
+    applyLockdown(Date.now()+60*60*1000);
+  } else if(typeof triggerLock === "function"){
+    triggerLock();
+  } else {
+    const until=Date.now()+60*60*1000;
+    localStorage.setItem("AGENT_X_LOCKDOWN_UNTIL", String(until));
+    location.reload();
+  }
+  return false;
+}
+
+
+function applyLockdown(endAt){
+  localStorage.setItem("AGENT_X_LOCKDOWN_UNTIL", String(endAt));
+  const l=document.getElementById("lockdown");
+  if(l){ l.classList.add("active"); l.setAttribute("aria-hidden","false"); }
+  document.body.style.overflow="hidden";
+  const timer=document.getElementById("lockTimer");
+  clearInterval(window.__xLockTimer);
+  window.__xLockTimer=setInterval(()=>{
+    const left=endAt-Date.now();
+    if(left<=0){
+      clearInterval(window.__xLockTimer);
+      localStorage.removeItem("AGENT_X_LOCKDOWN_UNTIL");
+      if(l) l.classList.remove("active");
+      document.body.style.overflow="";
+      if(timer) timer.textContent="01:00:00";
+      return;
+    }
+    const total=Math.ceil(left/1000);
+    const h=String(Math.floor(total/3600)).padStart(2,"0");
+    const mi=String(Math.floor((total%3600)/60)).padStart(2,"0");
+    const s=String(total%60).padStart(2,"0");
+    if(timer) timer.textContent=`${h}:${mi}:${s}`;
+  },250);
+}
+
+</script>
+<div id="lockdown" aria-hidden="true">
+  <div class="lockbox">
+    <div class="lock-x">X</div>
+    <div class="lock-title">SYSTEM LOCKDOWN</div>
+    <div class="lock-status">ALL ARCHIVES SEALED</div>
+    <div class="lock-line">X COMMAND EMERGENCY PROTOCOL</div>
+    <div id="lockTimer">01:00:00</div>
+    <div class="lock-warning-ar">بعد ساعة سيحدث كل شيء ولن تجده مرة أخرى.<br><b>ابحث عن X</b> وسيرجع الأمر إلى طبيعته.</div>
+    <div class="lock-small">ACCESS WILL BE RESTORED AUTOMATICALLY</div>
+    <button id="abortLock" type="button">ABORT LOCKDOWN</button>
+  </div>
+</div>
+</body></html>
