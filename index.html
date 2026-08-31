@@ -195,37 +195,53 @@ function verify(){
 document.getElementById("enter").addEventListener("click",verify);pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 
-const abortModal=document.getElementById("abortModal");
-const abortInput=document.getElementById("abortCodeInput");
-const abortSubmit=document.getElementById("abortSubmit");
-const abortError=document.getElementById("abortError");
-const abortClose=document.getElementById("abortClose");
 
-if(abortLock){
+function initAbortControls(){
+  const abortModal=document.getElementById("abortModal");
+  const abortInput=document.getElementById("abortCodeInput");
+  const abortSubmit=document.getElementById("abortSubmit");
+  const abortError=document.getElementById("abortError");
+  const abortClose=document.getElementById("abortClose");
+  const abortLock=document.getElementById("abortLock");
+
+  if(!abortModal || !abortInput || !abortSubmit || !abortLock) return;
+
   abortLock.addEventListener("click",()=>{
-    if(abortModal){
-      abortModal.classList.add("active");
-      abortModal.setAttribute("aria-hidden","false");
-      if(abortError) abortError.textContent="";
-      if(abortInput){ abortInput.value=""; abortInput.focus(); }
+    abortModal.classList.add("active");
+    abortModal.setAttribute("aria-hidden","false");
+    abortError.textContent="";
+    abortInput.value="";
+    setTimeout(()=>abortInput.focus(),50);
+  });
+
+  function submitAbort(){
+    const code=String(abortInput.value||"").trim();
+    if(code===ABORT_CODE){
+      abortModal.classList.remove("active");
+      abortModal.setAttribute("aria-hidden","true");
+      unlockSite();
+    }else{
+      abortError.textContent="INVALID OVERRIDE CODE";
+      abortInput.value="";
+      abortInput.focus();
     }
+  }
+
+  abortSubmit.addEventListener("click",submitAbort);
+  abortInput.addEventListener("keydown",e=>{if(e.key==="Enter")submitAbort();});
+  abortClose.addEventListener("click",()=>{
+    abortModal.classList.remove("active");
+    abortModal.setAttribute("aria-hidden","true");
   });
 }
-function submitAbort(){
-  const code=String(abortInput?.value||"").trim();
-  if(code===ABORT_CODE){
-    if(abortModal) abortModal.classList.remove("active");
-    unlockSite();
-  }else{
-    if(abortError) abortError.textContent="INVALID OVERRIDE CODE";
-    if(abortInput){ abortInput.value=""; abortInput.focus(); }
-  }
+
+/* The lockdown overlay is declared after this script, so initialize after parsing. */
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",initAbortControls,{once:true});
+}else{
+  initAbortControls();
 }
-if(abortSubmit) abortSubmit.addEventListener("click",submitAbort);
-if(abortInput) abortInput.addEventListener("keydown",e=>{if(e.key==="Enter")submitAbort();});
-if(abortClose) abortClose.addEventListener("click",()=>{
-  if(abortModal) abortModal.classList.remove("active");
-});
+
 
 const saved=Number(localStorage.getItem("AGENT_X_LOCKDOWN_UNTIL")||0);if(saved>Date.now())setTimeout(()=>applyLockdown(saved),0);else if(saved)unlockSite();
 </script>
