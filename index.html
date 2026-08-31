@@ -58,6 +58,22 @@ main{padding:22px;min-width:0}.topbar{display:flex;justify-content:space-between
   letter-spacing:.3px;
 }
 .file-code{display:block;color:#b32626;font:10px monospace;letter-spacing:1.5px;margin-bottom:4px;text-align:left}.nav button{line-height:1.35}
+
+html, body {
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto !important;
+}
+body {
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+.page {
+  min-height: 100vh;
+  height: auto !important;
+  overflow: visible !important;
+}
 </style></head>
 <body>
 <div id="gate"><div class="gatebox" id="gatebox"><div class="gatex">X</div><h1>AGENT X</h1><div class="access">SECURE TERMINAL • X COMMAND</div><img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X"><p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p><input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off"><button id="enter">VERIFY ACCESS</button><div id="error" class="error"></div><div id="random-denied-message" class="random-denied-message" aria-live="polite"></div><div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div></div></div>
