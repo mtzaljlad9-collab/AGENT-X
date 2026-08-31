@@ -103,7 +103,36 @@ body {
   cursor:pointer;
 }
 #abortError{min-height:20px;margin-top:9px;color:#c44;font-size:13px}
-</style></head>
+</style>
+<style>
+.archive-locked{
+  position:relative!important;
+  cursor:not-allowed!important;
+  opacity:.72;
+}
+.archive-locked::after{
+  content:"CLASSIFIED • BOSS ACCESS ONLY";
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.72);color:#c62828;font-size:12px;
+  letter-spacing:2px;text-align:center;pointer-events:none;
+}
+.archive-boss-only{
+  filter:brightness(.82);
+}
+#archiveDenied{
+  position:fixed;inset:0;z-index:2147483000;display:none;
+  align-items:center;justify-content:center;background:rgba(0,0,0,.94);
+  color:#ddd;text-align:center;padding:25px;
+}
+#archiveDenied.active{display:flex}
+#archiveDenied .denied-box{
+  width:min(520px,92vw);border:1px solid #333;padding:42px 28px;background:#050505;
+}
+#archiveDenied .denied-x{font-size:56px;color:#a71919;font-weight:900;letter-spacing:8px}
+#archiveDenied h2{font-size:20px;letter-spacing:3px;margin:10px 0 16px}
+#archiveDenied p{color:#888;line-height:1.8}
+</style>
+</head>
 <body>
 <div id="gate"><div class="gatebox" id="gatebox"><div class="gatex">X</div><h1>AGENT X</h1><div class="access">SECURE TERMINAL • X COMMAND</div><img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X"><p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p><input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off"><button id="enter">VERIFY ACCESS</button><div id="error" class="error"></div><div id="random-denied-message" class="random-denied-message" aria-live="polite"></div><div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div></div></div>
 <div id="app"><div class="layout">
@@ -246,4 +275,59 @@ if(abortInputEl)abortInputEl.addEventListener("keydown",e=>{if(e.key==="Enter")s
 
 
 const saved=Number(localStorage.getItem("AGENT_X_LOCKDOWN_UNTIL")||0);if(saved>Date.now())setTimeout(()=>applyLockdown(saved),0);else if(saved)unlockSite();
-</script></body></html>
+
+/* ARCHIVE: Big Boss only */
+(function(){
+  const BOSS_CODE = "newpixel2024";
+  const archiveCodes = new Set(["1852022","9901","2045","7319"]);
+  const archiveModal = document.getElementById("archiveDenied");
+  const isBoss = sessionStorage.getItem("AGENT_X_BOSS_ACCESS") === "1";
+
+  // Mark archive cards that expose FILE/CHANNEL classified entries.
+  document.querySelectorAll("button,a,[role='button']").forEach(el=>{
+    const t=(el.textContent||"").trim();
+    if(/FILE\s*(1852022|9901|2045|7319)|DARK CHAT|الملف السري|الأعضاء|العمليات|العتاد/i.test(t)){
+      if(!isBoss){
+        el.classList.add("archive-locked");
+        el.dataset.bossOnly="1";
+        el.addEventListener("click",function(ev){
+          ev.preventDefault(); ev.stopImmediatePropagation();
+          if(archiveModal){
+            archiveModal.classList.add("active");
+            archiveModal.setAttribute("aria-hidden","false");
+          }
+        },true);
+      }
+    }
+  });
+
+  // The existing access verifier can set this flag when the Boss code is used.
+  window.__AGENT_X_SET_BOSS = function(code){
+    if(String(code).trim()===BOSS_CODE){
+      sessionStorage.setItem("AGENT_X_BOSS_ACCESS","1");
+      location.reload();
+      return true;
+    }
+    return false;
+  };
+
+  if(archiveModal){
+    archiveModal.addEventListener("click",e=>{
+      if(e.target===archiveModal){
+        archiveModal.classList.remove("active");
+        archiveModal.setAttribute("aria-hidden","true");
+      }
+    });
+  }
+})();
+
+</script>
+<div id="archiveDenied" aria-hidden="true">
+  <div class="denied-box">
+    <div class="denied-x">X</div>
+    <h2>ACCESS CLASSIFIED</h2>
+    <p>هذه الملفات لا تُفتح من هذه الواجهة.</p>
+    <p>الوصول محصور بالقيادة العليا.</p>
+  </div>
+</div>
+</body></html>
