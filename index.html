@@ -156,8 +156,20 @@ body {
 
 <div class="footer">AGENT X • X COMMAND • CLASSIFIED • EYES ONLY • SILENCE IS SURVIVAL</div>
 </main></div></div>
+<div id="lockdown" aria-hidden="true"><div class="lockbox"><div class="lock-x">X</div><div class="lock-title">SYSTEM LOCKDOWN</div><div class="lock-status">ALL ARCHIVES SEALED</div><div class="lock-line">X COMMAND EMERGENCY PROTOCOL</div><div id="lockTimer">01:00:00</div><div class="lock-warning-ar">بعد ساعة سيحدث كل شيء ولن تجده مرة أخرى.<br><b>ابحث عن X</b> وسيرجع الأمر إلى طبيعته.</div><div class="lock-small">ACCESS WILL BE RESTORED AUTOMATICALLY</div><button id="abortLock" type="button">ABORT LOCKDOWN</button></div></div>
+<div id="abortModal" class="abort-modal" aria-hidden="true">
+  <div class="abort-box">
+    <div class="abort-x">X</div>
+    <h2>COMMANDER OVERRIDE</h2>
+    <p>أدخل رمز إلغاء الطوارئ للعودة إلى النظام.</p>
+    <input id="abortCodeInput" type="password" autocomplete="off" placeholder="OVERRIDE CODE">
+    <button id="abortSubmit" type="button">CONFIRM OVERRIDE</button>
+    <div id="abortError"></div>
+    <button id="abortClose" type="button" class="abort-close">CANCEL</button>
+  </div>
+</div>
 <script>
-const ROUTES={"8226121":"dashboard","2045":"operations","7319":"equipment","9901":"members","1852022":"secret"};
+const ROUTES={"8226121":"home","2045":"operations","7319":"equipment","9901":"members","1852022":"deep"};
 const BIG_BOSS_CODE="newpixel2024";
 const LOCKDOWN_CODE="14112004";
 const ABORT_CODE="WELCOM-X";
@@ -196,66 +208,42 @@ document.getElementById("enter").addEventListener("click",verify);pass.addEventL
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 
 
-function initAbortControls(){
-  const abortModal=document.getElementById("abortModal");
-  const abortInput=document.getElementById("abortCodeInput");
-  const abortSubmit=document.getElementById("abortSubmit");
-  const abortError=document.getElementById("abortError");
-  const abortClose=document.getElementById("abortClose");
-  const abortLock=document.getElementById("abortLock");
 
-  if(!abortModal || !abortInput || !abortSubmit || !abortLock) return;
-
-  abortLock.addEventListener("click",()=>{
-    abortModal.classList.add("active");
-    abortModal.setAttribute("aria-hidden","false");
-    abortError.textContent="";
-    abortInput.value="";
-    setTimeout(()=>abortInput.focus(),50);
-  });
-
-  function submitAbort(){
-    const code=String(abortInput.value||"").trim();
-    if(code===ABORT_CODE){
-      abortModal.classList.remove("active");
-      abortModal.setAttribute("aria-hidden","true");
-      unlockSite();
-    }else{
-      abortError.textContent="INVALID OVERRIDE CODE";
-      abortInput.value="";
-      abortInput.focus();
-    }
+function openAbortModal(){
+  const m=document.getElementById("abortModal");
+  const i=document.getElementById("abortCodeInput");
+  const e=document.getElementById("abortError");
+  if(!m)return;
+  m.classList.add("active");
+  m.setAttribute("aria-hidden","false");
+  if(e)e.textContent="";
+  if(i){i.value="";setTimeout(()=>i.focus(),0);}
+}
+function closeAbortModal(){
+  const m=document.getElementById("abortModal");
+  if(m){m.classList.remove("active");m.setAttribute("aria-hidden","true");}
+}
+function submitAbort(){
+  const i=document.getElementById("abortCodeInput");
+  const e=document.getElementById("abortError");
+  const code=String(i?.value||"").trim();
+  if(code===ABORT_CODE){
+    closeAbortModal();
+    unlockSite();
+  }else{
+    if(e)e.textContent="INVALID OVERRIDE CODE";
+    if(i){i.value="";i.focus();}
   }
-
-  abortSubmit.addEventListener("click",submitAbort);
-  abortInput.addEventListener("keydown",e=>{if(e.key==="Enter")submitAbort();});
-  abortClose.addEventListener("click",()=>{
-    abortModal.classList.remove("active");
-    abortModal.setAttribute("aria-hidden","true");
-  });
 }
-
-/* The lockdown overlay is declared after this script, so initialize after parsing. */
-if(document.readyState==="loading"){
-  document.addEventListener("DOMContentLoaded",initAbortControls,{once:true});
-}else{
-  initAbortControls();
-}
+const abortLockEl=document.getElementById("abortLock");
+const abortSubmitEl=document.getElementById("abortSubmit");
+const abortCloseEl=document.getElementById("abortClose");
+if(abortLockEl)abortLockEl.addEventListener("click",openAbortModal);
+if(abortSubmitEl)abortSubmitEl.addEventListener("click",submitAbort);
+if(abortCloseEl)abortCloseEl.addEventListener("click",closeAbortModal);
+const abortInputEl=document.getElementById("abortCodeInput");
+if(abortInputEl)abortInputEl.addEventListener("keydown",e=>{if(e.key==="Enter")submitAbort();});
 
 
 const saved=Number(localStorage.getItem("AGENT_X_LOCKDOWN_UNTIL")||0);if(saved>Date.now())setTimeout(()=>applyLockdown(saved),0);else if(saved)unlockSite();
-</script>
-
-<div id="lockdown" aria-hidden="true"><div class="lockbox"><div class="lock-x">X</div><div class="lock-title">SYSTEM LOCKDOWN</div><div class="lock-status">ALL ARCHIVES SEALED</div><div class="lock-line">X COMMAND EMERGENCY PROTOCOL</div><div id="lockTimer">01:00:00</div><div class="lock-warning-ar">بعد ساعة سيحدث كل شيء ولن تجده مرة أخرى.<br><b>ابحث عن X</b> وسيرجع الأمر إلى طبيعته.</div><div class="lock-small">ACCESS WILL BE RESTORED AUTOMATICALLY</div><button id="abortLock" type="button">ABORT LOCKDOWN</button></div></div>
-<div id="abortModal" class="abort-modal" aria-hidden="true">
-  <div class="abort-box">
-    <div class="abort-x">X</div>
-    <h2>COMMANDER OVERRIDE</h2>
-    <p>أدخل رمز إلغاء الطوارئ للعودة إلى النظام.</p>
-    <input id="abortCodeInput" type="password" autocomplete="off" placeholder="OVERRIDE CODE">
-    <button id="abortSubmit" type="button">CONFIRM OVERRIDE</button>
-    <div id="abortError"></div>
-    <button id="abortClose" type="button" class="abort-close">CANCEL</button>
-  </div>
-</div>
-</body></html>
+</script></body></html>
