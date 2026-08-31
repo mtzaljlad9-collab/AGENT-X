@@ -74,6 +74,35 @@ body {
   height: auto !important;
   overflow: visible !important;
 }
+
+.abort-modal{
+  position:fixed;inset:0;z-index:2147483647;display:none;
+  align-items:center;justify-content:center;padding:20px;
+  background:rgba(0,0,0,.88);
+}
+.abort-modal.active{display:flex!important}
+.abort-box{
+  width:min(430px,94vw);padding:30px;text-align:center;
+  background:#080808;border:1px solid #7d2222;
+  box-shadow:0 0 50px rgba(180,20,20,.22);
+}
+.abort-x{font-size:58px;font-weight:900;color:#b32626;letter-spacing:8px}
+.abort-box h2{margin:6px 0 12px;color:#eee;font-size:21px;letter-spacing:3px}
+.abort-box p{color:#aaa;font-size:14px;line-height:1.8}
+#abortCodeInput{
+  width:100%;height:48px;margin:12px 0;background:#030303;
+  border:1px solid #555;color:#fff;text-align:center;
+  font-size:17px;letter-spacing:3px;
+}
+#abortSubmit{
+  width:100%;height:48px;background:#8d2020;border:0;
+  color:#fff;font-weight:bold;letter-spacing:2px;cursor:pointer;
+}
+.abort-close{
+  margin-top:12px;background:transparent;border:0;color:#777;
+  cursor:pointer;
+}
+#abortError{min-height:20px;margin-top:9px;color:#c44;font-size:13px}
 </style></head>
 <body>
 <div id="gate"><div class="gatebox" id="gatebox"><div class="gatex">X</div><h1>AGENT X</h1><div class="access">SECURE TERMINAL • X COMMAND</div><img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X"><p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p><input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off"><button id="enter">VERIFY ACCESS</button><div id="error" class="error"></div><div id="random-denied-message" class="random-denied-message" aria-live="polite"></div><div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div></div></div>
@@ -165,8 +194,52 @@ function verify(){
 }
 document.getElementById("enter").addEventListener("click",verify);pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
-if(abortLock)abortLock.addEventListener("click",()=>{const code=prompt("ENTER COMMANDER ABORT CODE");if(code===ABORT_CODE)unlockSite();});
+
+const abortModal=document.getElementById("abortModal");
+const abortInput=document.getElementById("abortCodeInput");
+const abortSubmit=document.getElementById("abortSubmit");
+const abortError=document.getElementById("abortError");
+const abortClose=document.getElementById("abortClose");
+
+if(abortLock){
+  abortLock.addEventListener("click",()=>{
+    if(abortModal){
+      abortModal.classList.add("active");
+      abortModal.setAttribute("aria-hidden","false");
+      if(abortError) abortError.textContent="";
+      if(abortInput){ abortInput.value=""; abortInput.focus(); }
+    }
+  });
+}
+function submitAbort(){
+  const code=String(abortInput?.value||"").trim();
+  if(code===ABORT_CODE){
+    if(abortModal) abortModal.classList.remove("active");
+    unlockSite();
+  }else{
+    if(abortError) abortError.textContent="INVALID OVERRIDE CODE";
+    if(abortInput){ abortInput.value=""; abortInput.focus(); }
+  }
+}
+if(abortSubmit) abortSubmit.addEventListener("click",submitAbort);
+if(abortInput) abortInput.addEventListener("keydown",e=>{if(e.key==="Enter")submitAbort();});
+if(abortClose) abortClose.addEventListener("click",()=>{
+  if(abortModal) abortModal.classList.remove("active");
+});
+
 const saved=Number(localStorage.getItem("AGENT_X_LOCKDOWN_UNTIL")||0);if(saved>Date.now())setTimeout(()=>applyLockdown(saved),0);else if(saved)unlockSite();
 </script>
 
-<div id="lockdown" aria-hidden="true"><div class="lockbox"><div class="lock-x">X</div><div class="lock-title">SYSTEM LOCKDOWN</div><div class="lock-status">ALL ARCHIVES SEALED</div><div class="lock-line">X COMMAND EMERGENCY PROTOCOL</div><div id="lockTimer">01:00:00</div><div class="lock-warning-ar">بعد ساعة سيحدث كل شيء ولن تجده مرة أخرى.<br><b>ابحث عن X</b> وسيرجع الأمر إلى طبيعته.</div><div class="lock-small">ACCESS WILL BE RESTORED AUTOMATICALLY</div><button id="abortLock" type="button">ABORT LOCKDOWN</button></div></div></body></html>
+<div id="lockdown" aria-hidden="true"><div class="lockbox"><div class="lock-x">X</div><div class="lock-title">SYSTEM LOCKDOWN</div><div class="lock-status">ALL ARCHIVES SEALED</div><div class="lock-line">X COMMAND EMERGENCY PROTOCOL</div><div id="lockTimer">01:00:00</div><div class="lock-warning-ar">بعد ساعة سيحدث كل شيء ولن تجده مرة أخرى.<br><b>ابحث عن X</b> وسيرجع الأمر إلى طبيعته.</div><div class="lock-small">ACCESS WILL BE RESTORED AUTOMATICALLY</div><button id="abortLock" type="button">ABORT LOCKDOWN</button></div></div>
+<div id="abortModal" class="abort-modal" aria-hidden="true">
+  <div class="abort-box">
+    <div class="abort-x">X</div>
+    <h2>COMMANDER OVERRIDE</h2>
+    <p>أدخل رمز إلغاء الطوارئ للعودة إلى النظام.</p>
+    <input id="abortCodeInput" type="password" autocomplete="off" placeholder="OVERRIDE CODE">
+    <button id="abortSubmit" type="button">CONFIRM OVERRIDE</button>
+    <div id="abortError"></div>
+    <button id="abortClose" type="button" class="abort-close">CANCEL</button>
+  </div>
+</div>
+</body></html>
