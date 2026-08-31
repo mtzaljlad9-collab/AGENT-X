@@ -57,12 +57,13 @@ main{padding:22px;min-width:0}.topbar{display:flex;justify-content:space-between
   min-height:42px;
   letter-spacing:.3px;
 }
+.file-code{display:block;color:#b32626;font:10px monospace;letter-spacing:1.5px;margin-bottom:4px;text-align:left}.nav button{line-height:1.35}
 </style></head>
 <body>
 <div id="gate"><div class="gatebox" id="gatebox"><div class="gatex">X</div><h1>AGENT X</h1><div class="access">SECURE TERMINAL • X COMMAND</div><img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X"><p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p><input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off"><button id="enter">VERIFY ACCESS</button><div id="error" class="error"></div><div id="random-denied-message" class="random-denied-message" aria-live="polite"></div><div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div></div></div>
 <div id="app"><div class="layout">
 <aside class="side"><div class="brand"><img src="AGENT_X_LOGO.png"><h1>AGENT X</h1><small>X COMMAND • SECURE NETWORK</small></div><div class="nav">
-<button data-page="dashboard">▣ لوحة القيادة</button><button data-page="members">♙ الأعضاء</button><button data-page="operations">◉ العمليات</button><button data-page="secret">▣ الملف السري</button><button data-page="chat">▣ DARK CHAT</button><button data-page="equipment">⚙ العتاد</button><button data-page="reports">▤ التقارير</button><button data-page="intelligence">◉ الاستخبارات</button></div><div class="side-status">SYSTEM STATUS<br><span class="online">● ONLINE</span><br><br>CLEARANCE<br><span class="red">LEVEL X</span></div></aside>
+<button data-page="dashboard"><span class="file-code">FILE 8226121</span> لوحة القيادة</button><button data-page="members"><span class="file-code">FILE 9901</span> الأعضاء</button><button data-page="operations"><span class="file-code">FILE 2045</span> العمليات</button><button data-page="secret"><span class="file-code">FILE 1852022</span> الملف السري</button><button data-page="chat"><span class="file-code">CHANNEL</span> DARK CHAT</button><button data-page="equipment"><span class="file-code">FILE 7319</span> العتاد</button><button data-page="reports"><span class="file-code">CLASSIFIED</span> التقارير</button><button data-page="intelligence"><span class="file-code">CLASSIFIED</span> الاستخبارات</button></div><div class="side-status">SYSTEM STATUS<br><span class="online">● ONLINE</span><br><br>CLEARANCE<br><span class="red">LEVEL X</span></div></aside>
 <main>
 <section id="bigboss" class="page">
 <div class="topbar"><span>X COMMAND / SUPREME</span><span class="stamp">COMMANDER</span></div>
@@ -133,8 +134,8 @@ function returnToGate(){app.style.display="none";gate.style.display="flex";pass.
 function openBossArchive(){const a=document.getElementById("bossArchive");if(a)a.style.display="block";}
 function bossOpen(id){showPage(id);return false;}
 function formatTime(ms){const t=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(t/3600)).padStart(2,"0")+":"+String(Math.floor((t%3600)/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0");}
-function unlockSite(){localStorage.removeItem("AGENT_X_LOCKDOWN_UNTIL");if(lockdown)lockdown.classList.remove("active");document.body.style.overflow="";if(lockTimer)lockTimer.textContent="01:00:00";clearInterval(window.__xLockTimer);}
-function applyLockdown(endAt){localStorage.setItem("AGENT_X_LOCKDOWN_UNTIL",String(endAt));if(lockdown)lockdown.classList.add("active");document.body.style.overflow="hidden";clearInterval(window.__xLockTimer);const tick=()=>{const left=endAt-Date.now();if(left<=0){unlockSite();return;}if(lockTimer)lockTimer.textContent=formatTime(left);};tick();window.__xLockTimer=setInterval(tick,250);}
+function unlockSite(){const l=document.getElementById("lockdown"),t=document.getElementById("lockTimer");localStorage.removeItem("AGENT_X_LOCKDOWN_UNTIL");if(l)l.classList.remove("active");if(l)l.setAttribute("aria-hidden","true");document.body.style.overflow="";if(t)t.textContent="01:00:00";clearInterval(window.__xLockTimer);}
+function applyLockdown(endAt){const l=document.getElementById("lockdown"),t=document.getElementById("lockTimer");localStorage.setItem("AGENT_X_LOCKDOWN_UNTIL",String(endAt));if(l){l.classList.add("active");l.setAttribute("aria-hidden","false");}document.body.style.overflow="hidden";clearInterval(window.__xLockTimer);const tick=()=>{const left=endAt-Date.now();if(left<=0){unlockSite();return;}if(t)t.textContent=formatTime(left);};tick();window.__xLockTimer=setInterval(tick,250);}
 function triggerLockdown(){applyLockdown(Date.now()+LOCK_DURATION);}
 function verify(){
  const code=String(pass.value||"").trim();
@@ -149,7 +150,7 @@ function verify(){
 document.getElementById("enter").addEventListener("click",verify);pass.addEventListener("keydown",e=>{if(e.key==="Enter")verify();});
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 if(abortLock)abortLock.addEventListener("click",()=>{const code=prompt("ENTER COMMANDER ABORT CODE");if(code===ABORT_CODE)unlockSite();});
-const saved=Number(localStorage.getItem("AGENT_X_LOCKDOWN_UNTIL")||0);if(saved>Date.now())applyLockdown(saved);else if(saved)unlockSite();
+const saved=Number(localStorage.getItem("AGENT_X_LOCKDOWN_UNTIL")||0);if(saved>Date.now())setTimeout(()=>applyLockdown(saved),0);else if(saved)unlockSite();
 </script>
 
 <div id="lockdown" aria-hidden="true"><div class="lockbox"><div class="lock-x">X</div><div class="lock-title">SYSTEM LOCKDOWN</div><div class="lock-status">ALL ARCHIVES SEALED</div><div class="lock-line">X COMMAND EMERGENCY PROTOCOL</div><div id="lockTimer">01:00:00</div><div class="lock-warning-ar">بعد ساعة سيحدث كل شيء ولن تجده مرة أخرى.<br><b>ابحث عن X</b> وسيرجع الأمر إلى طبيعته.</div><div class="lock-small">ACCESS WILL BE RESTORED AUTOMATICALLY</div><button id="abortLock" type="button">ABORT LOCKDOWN</button></div></div></body></html>
