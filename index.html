@@ -132,10 +132,29 @@ body {
 #archiveDenied h2{font-size:20px;letter-spacing:3px;margin:10px 0 16px}
 #archiveDenied p{color:#888;line-height:1.8}
 </style>
+
+<style>
+#backToGate{
+  position:fixed;
+  top:18px;
+  left:18px;
+  z-index:1000;
+  display:none;
+  padding:9px 15px;
+  background:rgba(5,5,5,.88);
+  border:1px solid #8d2020;
+  color:#ddd;
+  font-family:inherit;
+  font-size:12px;
+  letter-spacing:1.5px;
+  cursor:pointer;
+}
+#backToGate:hover{border-color:#e33;color:#fff}
+</style>
 </head>
 <body>
 <div id="gate"><div class="gatebox" id="gatebox"><div class="gatex">X</div><h1>AGENT X</h1><div class="access">SECURE TERMINAL • X COMMAND</div><img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X"><p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p><input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off"><button id="enter">VERIFY ACCESS</button><div id="error" class="error"></div><div id="random-denied-message" class="random-denied-message" aria-live="polite"></div><div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div></div></div>
-<div id="app"><div class="layout">
+<button id="backToGate" type="button">← BACK TO ACCESS</button><div id="app"><div class="layout">
 <aside class="side"><div class="brand"><img src="AGENT_X_LOGO.png"><h1>AGENT X</h1><small>X COMMAND • SECURE NETWORK</small></div><div class="nav">
 <button data-page="dashboard"><span class="file-code">FILE 8226121</span> لوحة القيادة</button><button data-page="members"><span class="file-code">FILE 9901</span> الأعضاء</button><button data-page="operations"><span class="file-code">FILE 2045</span> العمليات</button><button data-page="secret"><span class="file-code">FILE 1852022</span> الملف السري</button><button data-page="chat"><span class="file-code">CHANNEL</span> DARK CHAT</button><button data-page="equipment"><span class="file-code">FILE 7319</span> العتاد</button><button data-page="reports"><span class="file-code">CLASSIFIED</span> التقارير</button><button data-page="intelligence"><span class="file-code">CLASSIFIED</span> الاستخبارات</button></div><div class="side-status">SYSTEM STATUS<br><span class="online">● ONLINE</span><br><br>CLEARANCE<br><span class="red">LEVEL X</span></div></aside>
 <main>
@@ -319,6 +338,42 @@ const saved=Number(localStorage.getItem("AGENT_X_LOCKDOWN_UNTIL")||0);if(saved>D
       }
     });
   }
+})();
+
+
+(function(){
+  const back=document.getElementById("backToGate");
+  const gate=document.getElementById("gate");
+  const app=document.getElementById("app");
+  if(!back || !gate || !app) return;
+
+  function showBack(){
+    back.style.display = "block";
+  }
+  function hideBack(){
+    back.style.display = "none";
+  }
+
+  back.addEventListener("click",()=>{
+    app.style.display = "none";
+    gate.style.display = "flex";
+    hideBack();
+    const pass=document.getElementById("pass");
+    const error=document.getElementById("error");
+    const denied=document.getElementById("random-denied-message");
+    if(pass){pass.value="";pass.focus();}
+    if(error)error.textContent="";
+    if(denied)denied.textContent="";
+  });
+
+  // Show it whenever the app is visible after successful access.
+  const observer=new MutationObserver(()=>{
+    const visible=getComputedStyle(app).display!=="none";
+    if(visible) showBack();
+  });
+  observer.observe(app,{attributes:true,attributeFilter:["style","class"]});
+
+  if(getComputedStyle(app).display!=="none") showBack();
 })();
 
 </script>
