@@ -151,13 +151,76 @@ body {
 }
 #backToGate:hover{border-color:#e33;color:#fff}
 </style>
+
+<style>
+.client-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;padding:20px}
+.client-card{border:1px solid #4b4b4b;background:rgba(5,5,5,.22);padding:16px}
+.client-photo{width:100%;height:230px;object-fit:cover;background:#080808;border:1px solid #333}
+.client-meta{margin-top:12px;line-height:2;color:#ddd}
+.client-meta b{color:#ef6262}
+.client-tag{display:inline-block;margin-top:8px;border:1px solid #7d2020;padding:3px 9px;color:#ef6262;font-size:11px;letter-spacing:1px}
+</style>
 </head>
 <body>
 <div id="gate"><div class="gatebox" id="gatebox"><div class="gatex">X</div><h1>AGENT X</h1><div class="access">SECURE TERMINAL • X COMMAND</div><img class="gate-logo" src="AGENT_X_LOGO.png" alt="AGENT X"><p>أدخل رمز الوصول لفتح الواجهة المصرح لك بها.</p><input id="pass" type="password" maxlength="32" placeholder="ACCESS CODE" autocomplete="off"><button id="enter">VERIFY ACCESS</button><div id="error" class="error"></div><div id="random-denied-message" class="random-denied-message" aria-live="polite"></div><div class="secretline">CLEARANCE: X • EYES ONLY • FILE 001</div></div></div>
 <button id="backToGate" type="button">← BACK TO ACCESS</button><div id="app"><div class="layout">
 <aside class="side"><div class="brand"><img src="AGENT_X_LOGO.png"><h1>AGENT X</h1><small>X COMMAND • SECURE NETWORK</small></div><div class="nav">
-<button data-page="dashboard"><span class="file-code">FILE 8226121</span> لوحة القيادة</button><button data-page="members"><span class="file-code">FILE 9901</span> الأعضاء</button><button data-page="operations"><span class="file-code">FILE 2045</span> العمليات</button><button data-page="secret"><span class="file-code">FILE 1852022</span> الملف السري</button><button data-page="chat"><span class="file-code">CHANNEL</span> DARK CHAT</button><button data-page="equipment"><span class="file-code">FILE 7319</span> العتاد</button><button data-page="reports"><span class="file-code">CLASSIFIED</span> التقارير</button><button data-page="intelligence"><span class="file-code">CLASSIFIED</span> الاستخبارات</button></div><div class="side-status">SYSTEM STATUS<br><span class="online">● ONLINE</span><br><br>CLEARANCE<br><span class="red">LEVEL X</span></div></aside>
+<button data-page="dashboard"><span class="file-code">FILE 8226121</span> لوحة القيادة</button><button data-page="members"><span class="file-code">FILE 9901</span> الأعضاء</button><button data-page="operations"><span class="file-code">FILE 2045</span> العمليات</button><button data-page="secret"><span class="file-code">FILE 1852022</span> الملف السري</button><button data-page="chat"><span class="file-code">CHANNEL</span> DARK CHAT</button><button data-page="equipment"><span class="file-code">FILE 7319</span> العتاد</button><button data-page="reports"><span class="file-code">CLASSIFIED</span> التقارير</button><button data-page="intelligence"><span class="file-code">CLASSIFIED</span> الاستخبارات</button><button data-page="clients"><span class="file-code">FILES</span> العملاء</button></div><div class="side-status">SYSTEM STATUS<br><span class="online">● ONLINE</span><br><br>CLEARANCE<br><span class="red">LEVEL X</span></div></aside>
 <main>
+
+<section id="clients" class="page">
+  <div class="topbar"><span>X COMMAND / CLIENTS</span><span>CLASSIFIED</span></div>
+  <h2 style="padding:20px 20px 0">ملفات العملاء</h2>
+  <p style="padding:0 20px;color:#888">كل ملف مستقل ومربوط ببياناته.</p>
+  <div class="client-grid">
+    
+<div class="client-card" data-client="X-01">
+  <img class="client-photo" src="X-01.png" alt="Client X-01">
+  <div class="client-meta">
+    <div><b>FILE:</b> X-01</div>
+    <div><b>NAME:</b> Youssef alkomse</div>
+    <div><b>NATIONAL ID:</b> FRL12058</div>
+    <div><b>PHONE:</b> 091176420</div>
+    <div><b>ASSIGNMENT:</b> قائد ميداني</div>
+  </div>
+  <span class="client-tag">CLASSIFIED</span>
+</div>
+<div class="client-card" data-client="X-02">
+  <div class="client-photo"></div>
+  <div class="client-meta">
+    <div><b>FILE:</b> X-02</div>
+    <div><b>NAME:</b> مهيمن الفرج</div>
+    <div><b>NATIONAL ID:</b> مطلوبة</div>
+    <div><b>PHONE:</b> 0922092614</div>
+    <div><b>ASSIGNMENT:</b> مسؤول العتاد</div>
+  </div>
+  <span class="client-tag">CLASSIFIED</span>
+</div>
+<div class="client-card" data-client="X-03">
+  <img class="client-photo" src="X-03.png" alt="Client X-03">
+  <div class="client-meta">
+    <div><b>FILE:</b> X-03</div>
+    <div><b>NAME:</b> Casio Nero</div>
+    <div><b>NATIONAL ID:</b> QTC23025</div>
+    <div><b>PHONE:</b> 0918913291</div>
+    <div><b>ASSIGNMENT:</b> عميل</div>
+  </div>
+  <span class="client-tag">CLASSIFIED</span>
+</div>
+<div class="client-card" data-client="X-04">
+  <img class="client-photo" src="X-04.png" alt="Client X-04">
+  <div class="client-meta">
+    <div><b>FILE:</b> X-04</div>
+    <div><b>NAME:</b> Lucian Kazmiri</div>
+    <div><b>NATIONAL ID:</b> XFR51196</div>
+    <div><b>PHONE:</b> 0922000204</div>
+    <div><b>ASSIGNMENT:</b> عميل</div>
+  </div>
+  <span class="client-tag">CLASSIFIED</span>
+</div>
+  </div>
+</section>
+
 <section id="bigboss" class="page">
 <div class="topbar"><span>X COMMAND / SUPREME</span><span class="stamp">COMMANDER</span></div>
 <div class="title"><div><h2>SUPREME CLEARANCE</h2><p>BIG BOSS ACCESS</p></div></div>
